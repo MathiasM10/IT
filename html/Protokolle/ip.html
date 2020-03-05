@@ -1,0 +1,2231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0036)http://graf.tgm.ac.at/BUN/nw_ip.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><!-- #BeginTemplate "/BSNW/Templates/skriptum.dwt" --><!-- #BeginEditable "doctitle" --><title>BSNW Netze</title><!-- #EndEditable -->
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+<link rel="stylesheet" href="./ip_files/bsnw.css" type="text/css">
+
+<script language="JavaScript">
+
+<!--
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.0
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script></head><body onload="MM_preloadImages(&#39;button/buob_hi.jpg&#39;,&#39;button/buli_hi.jpg&#39;,&#39;button/bure_hi.jpg&#39;)" bgcolor="#ffffff" text="#000000">
+
+<!-- #BeginEditable "Text" --> <span class="ueberschrift_2">2.3.1 IP</span> 
+
+<p class="text">Das IP-Protokoll (<span class="text_fett">internet protocol</span>) 
+
+  - es wird gelegentlich auch als das Hauptprotokoll von TCP/IP bezeichnet - liegt 
+
+  auf dem OSI-Layer 3 (internet) und ist ein<span class="text_fett"> verbindungsloses</span> 
+
+  Protokoll. Das bedeutet, dass keine Verbindung zum Zielknoten aufgebaut wird, 
+
+  sondern die Pakete einfach dem Netz übergeben werden und dort ihren Weg 
+
+  quasi selbst finden. Es wird nicht überprüft, ob der Zielrechner überhaupt 
+
+  erreichbar ist und innerhalb des IP-Protokolls auch nicht gewährleistet, 
+
+  dass die Datenpakete tatsächlich beim Empfänger ankommen. Zusätzlich 
+
+  gibt es noch die Möglichkeit, Datagramme in kleinere Blöcke zu <span class="text">fragmentieren 
+
+  und getrennt weiterzuleiten</span>, falls in einem Teilnetz eine MTU (Maximum 
+
+  Transmisson Unit) (=Längenbeschränkung) vorgegeben ist. In diesem 
+
+  Fall werden die IP-Header im Wesentlichen repliziert und vor die Datenfragmente 
+
+  gesetzt. Umgekehrt ist es auch möglich, kleinere Teildatagramme zu einem 
+
+  größeren zu <span class="text_fett">reassemblieren</span>.</p>
+<p class="text">Der IP-Header hat folgenden Aufbau:</p>
+<p class="text text_zent"><img style="width: 500px; height: 235px;" alt="IPv4 Header" src="./ip_files/Ipv4_header.png"><br>
+(aus: https://commons.wikimedia.org)<br>
+<span class="text_zent"></span></p>
+<p class="text">Legende:</p>
+
+
+<ul>
+
+  <li class="text">Version: IP-Protokollversion </li>
+
+  <li class="text">IHL (Internet Header Length)</li>
+
+  <li class="text">Type of Service: Charakterisieren die Funktion des Datagramms</li>
+
+  <li class="text">Total Length: Sie beträgt max. 64 KByte</li>
+
+  <li class="text">Identification: Eindeutige Kennung eines Datagramms. Diese 
+
+    wird gemeinsam mit der Source Address für das reassemblieren von Datagrammen 
+
+    benötigt.</li>
+
+  <li class="text"> Flags: Dient der Steuerung der Fragmentierung</li>
+
+  <li class="text">Fragment Offset: Anhand dieses Wertes kann der Empfänger 
+
+    feststellen, ob Fragmente fehlen. Das ist notwendig, weil nur vollständige 
+
+    Datagramme an höhere Schichten weitergegeben werden dürfen.</li>
+
+  <li class="text">TTL (Time-to-live): Angabe der maximalen Lebensdauer des Datagramms, 
+
+    damit nach Routingfehlern Datagramme, die sich in Schleifen befinden, aus 
+
+    dem Netz gelöscht werden können. In der Praxis werden die Hops benutzt. 
+
+    Die TTL ist ein Wert zwischen 0 und 255, der bei jedem Hop dekrementiert wird. 
+
+    Pakete mit TTL=0 werden gelöscht.</li>
+
+  <li class="text">Protocol: Angabe des übergeordneten Protokolls (ULP, Upper 
+
+    Layer Protocol)</li>
+
+  <li class="text">Header Checksum: Prüfsumme über den Header</li>
+
+  <li class="text">Source Address: IP-Adresse des Absenders</li>
+
+  <li class="text">Destination Address: IP-Adresse des Empfängers</li>
+
+  <li class="text">Options: Optionales Feld für weitere Informationen, wie 
+
+    den Weg des Datagramms oder Timestamps.</li>
+
+  <li class="text">Padding: Füllbits</li>
+
+</ul>
+
+<p style="text-align: center;" class="text"><br>
+</p>
+<p class="text">Besondere Beachtung verdient die IP-Adresse, wobei hier die immer 
+
+  noch gängige Version <span class="text_fett">IPv4</span> ausführlich 
+
+  behandelt werden soll.</p>
+
+
+<p class="ueberschrift_3">IP-Adresse (IPv4)</p>
+
+<p class="text"><br>
+
+  Zur Adressierung der Netzknoten, die innerhalb der TCP/IP-Familie auch <span class="text_fett">Hosts</span> 
+
+  heißen, werden Adressen verwendet, die jeweils aus einer 32 Bit langen 
+
+  Binärzahl bestehen. Diese wird der bessern Lesbarkeit halber in Form von 
+
+  vier, durch Punkte getrennten, Bytes dezimal dargestellt.</p>
+
+<table align="center" border="0" width="150">
+
+  <tbody><tr> 
+
+    <td class="text_fett_zent_kurs">193.170.8.138</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent_kurs">11000001.10101010.00001000.10001010</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text">Weiters sind bei IP-Adressen zwei Teile zu unterscheiden, deren 
+
+  Längen variabel sind, die <span class="text_fett">Netzwerkadresse</span> 
+
+  (Net-ID) und die <span class="text_fett">Hostadresse</span> (Host-ID). Man teilt 
+
+  Netzwerke wie folgt ein:<br>
+
+</p>
+
+<table align="center" border="0" cellpadding="5" cellspacing="3" width="683">
+
+  <tbody><tr> 
+
+    <td class="text_fett_zent"> 
+
+      <div align="right"></div>
+
+    <br>
+</td>
+
+    <td class="text" width="10"> 
+
+      <div align="right">31</div>
+
+    </td>
+
+    <td class="text" width="10"> 
+
+      <div align="right">30</div>
+
+    </td>
+
+    <td class="text" width="10"> 
+
+      <div align="right">29</div>
+
+    </td>
+
+    <td class="text" width="10"> 
+
+      <div align="right">28</div>
+
+    </td>
+
+    <td class="text" width="10"> 
+
+      <div align="right">27</div>
+
+    </td>
+
+    <td class="text" width="100"> 
+
+      <div align="right">24</div>
+
+    </td>
+
+    <td class="text" width="100"> 
+
+      <div align="right">16</div>
+
+    </td>
+
+    <td class="text" width="100"> 
+
+      <div align="right">8</div>
+
+    </td>
+
+    <td class="text" width="100"> 
+
+      <div align="right">0</div>
+
+    </td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent">Klasse A</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">0</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="100"><font color="#ffffff">Net-ID</font></td>
+
+    <td class="text_fett_zent" colspan="3" bgcolor="#006699"><font color="#ffffff">&nbsp;</font><font color="#ffffff">Host-ID</font><font color="#ffffff">&nbsp;</font></td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent">Klasse B</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">0</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" colspan="2" bgcolor="#ff3300"><font color="#ffffff">Net-ID</font></td>
+
+    <td class="text_fett_zent" colspan="2" bgcolor="#006699"><font color="#ffffff">Host-ID</font><font color="#ffffff">&nbsp;</font></td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent">Klasse C</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">0</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">&nbsp;</td>
+
+    <td class="text_fett_zent" colspan="3" bgcolor="#ff3300"><font color="#ffffff">Net-ID</font></td>
+
+    <td class="text_fett_zent" bgcolor="#006699" width="100"><font color="#ffffff">Host-ID</font><font color="#ffffff">&nbsp;</font></td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent">Klasse D</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">0</td>
+
+    <td class="text_fett_zent" colspan="5" bgcolor="#ff3300">Multicast Adresse 
+
+      (28 Bit) </td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent">Klasse E</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">1</td>
+
+    <td class="text_fett_zent" bgcolor="#ff3300" width="10">0</td>
+
+    <td class="text_fett_zent" colspan="4" bgcolor="#ff0000">Reserviert</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text"><br>
+
+  Die Netzklassen haben damit folgende leicht über<span class="text_hoch">prüfbare</span> 
+
+  Eigenschaften:<br>
+
+</p>
+
+<table align="center" border="1" width="650">
+
+  <tbody><tr bgcolor="#6699cc"> 
+
+    <td class="text_fett">&nbsp;</td>
+
+    <td class="text_fett_zent" width="160">Klasse A</td>
+
+    <td class="text_fett_zent" width="160">Klasse B</td>
+
+    <td class="text_fett_zent" width="160">Klasse C</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Klassen-ID</td>
+
+    <td class="text_zent" width="160">0</td>
+
+    <td class="text_zent" width="160">10</td>
+
+    <td class="text_zent" width="160">110</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Netz-ID</td>
+
+    <td class="text_zent" width="160">8 Bit</td>
+
+    <td class="text_zent" width="160">16 Bit</td>
+
+    <td class="text_zent" width="160">24 Bit</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Host-ID</td>
+
+    <td class="text_zent" width="160">24 Bit</td>
+
+    <td class="text_zent" width="160">16 Bit</td>
+
+    <td class="text_zent" width="160">8 Bit</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Netzmaske</td>
+
+    <td class="text_zent" width="160">255.0.0.0</td>
+
+    <td class="text_zent" width="160">255.255.0.0</td>
+
+    <td class="text_zent" width="160">255.255.255.0 </td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Wertebereich<br>
+
+      (theoretisch) </td>
+
+    <td class="text_zent" width="160">0.0.0.0<br>
+
+      127.255.255.255 </td>
+
+    <td class="text_zent" width="160">128.0.0.0<br>
+
+      191.255.255.255</td>
+
+    <td class="text_zent" width="160">192.0.0.0<br>
+
+      223.255.255.255 </td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Anzahl der Netze</td>
+
+    <td class="text_kursiv_zent" width="160">2<sup>7</sup>=128</td>
+
+    <td class="text_kursiv_zent" width="160">2<sup>6</sup>*256 =16384</td>
+
+    <td class="text_kursiv_zent" width="160">2<sup>5</sup>*256*256=2097152</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett" bgcolor="#6699cc">Anzahl der Hosts</td>
+
+    <td class="text_kursiv_zent" width="160">256<sup>3</sup>=16777216</td>
+
+    <td class="text_kursiv_zent" width="160">256<sup>2</sup>=65536</td>
+
+    <td class="text_kursiv_zent" width="160">256<sup>1</sup>=256</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text"><br>
+
+  Die Klassen D und E sind besondere Netzklassen. Die Identifikation für 
+
+  die Adressen der Klasse D ist die Bitkombination 1110. Der Adressbereich geht 
+
+  von 224.0.0.0 bis 239.255.255.255. Durch den 28 Bit langen Identifikator für 
+
+  die Multicast-Gruppen, ist die Bildung von bis zu 268 435 456 Gruppen möglich.<br>
+
+  Kennzeichnung der Klasse E ist die Bitkombination »11110« in den 
+
+  fünf Bits höchster Ordnung. Bei den Adressen der Klasse E handelt 
+
+  es sich um reservierte Adressen für zukünftige Anwendungen. Der Adressbereich 
+
+  reicht von 240.0.0.0 bis 247.255.255.255. </p>
+
+<p class="text">Die <span class="text_fett">Netzmaske</span> hat den gleichen 
+
+  Aufbau wie eine IP-Adresse und hat die Aufgabe, Netzwerkadresse und Hostadresse 
+
+  zu trennen. In der Binärdarstellung erhält man die Netzmaske, indem 
+
+  man die Netz-ID auf 1 und die Host-ID auf 0 setzt. In unserem einleitenden Beispiel, 
+
+  das die IP-Adresse eines TGM-Servers zeigt, stellen wir fest, dass die Adresse 
+
+  zu einem Klasse-C-Netz gehört und fügen die passende Netzmaske hinzu. 
+
+  Wir wenden nun auf IP-Adresse und Netzmaske eine bitweise AND-Verknüpfung 
+
+  an, die bekanntlich folgende Rechenregeln kennt:<br>
+
+</p>
+
+<table align="center" border="1" width="197">
+
+  <tbody><tr> 
+
+    <td class="text_fett_zent_kurs" bgcolor="#000099"><font color="#ffffff">A</font></td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">1</td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">1</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent_kurs" bgcolor="#000099"><font color="#ffffff">B</font></td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">1</td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" bgcolor="#cccccc" width="15">1</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent_kurs" bgcolor="#000099"><font color="#ffffff">A 
+
+      AND B</font></td>
+
+    <td class="text_fett_zent_kurs" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" width="15">0</td>
+
+    <td class="text_fett_zent_kurs" width="15">1</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text">Die Verknüpfung liefert 1, falls beide Summanden 1 sind, 
+
+  sonst 0, was auch im [fasch,wahr]-Modell nachvollziehbar ist.</p>
+
+<table align="center" border="1" width="709">
+
+  <tbody><tr bgcolor="#6699cc"> 
+
+    <td class="text_fett_zent_kurs" width="33%">&nbsp;</td>
+
+    <td class="text_fett_zent" width="33%">Dezimal</td>
+
+    <td class="text_fett_zent" width="33%">Binär</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#6699cc" width="33%">IP-Adresse</td>
+
+    <td class="text_fett_zent_kurs" width="33%">193.170.8.138</td>
+
+    <td class="text_fett_zent_kurs" width="33%">11000001.10101010.00001000.10001010</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#6699cc" width="33%">Netzmaske</td>
+
+    <td class="text_fett_zent_kurs" width="33%">255.255.255.0</td>
+
+    <td class="text_fett_zent_kurs" width="33%">11111111.11111111.11111111.00000000</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#6699cc" width="33%">IP AND Mask</td>
+
+    <td class="text_fett_zent_kurs" width="33%">193.170.8.0</td>
+
+    <td class="text_fett_zent_kurs" width="33%">11000001.10101010.00001000.00000000</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#6699cc" width="33%">Broadcast</td>
+
+    <td class="text_fett_zent_kurs" width="33%">193.170.8.255</td>
+
+    <td class="text_fett_zent_kurs" width="33%">11000001.10101010.00001000.11111111</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text"><br>
+
+  Die AND-Verknüpfung liefert eine Adresse, die aus der Netz-ID und dem Wert 
+
+  0 im letzten Byte zusammengesetzt ist, die <span class="text_fett">Netzwerkadresse</span>.</p>
+
+<p class="text">Es gilt:</p>
+
+<ul>
+
+  <li class="text">Alle Rechner mit der gleichen Netzwerkadresse gehören 
+
+    zu einem Netz und sind untereinander erreichbar.</li>
+
+  <li class="text">Zur Koppelung von Netzen unterschiedlicher Adresse wird eine 
+
+    spezielle Hardware- oder Softwarekomponente, ein sogenannter Router, benötigt.</li>
+
+</ul>
+
+<p class="text"><span class="text">Neben der Netzwerkadresse, die natürlich 
+
+  keinem Host zugewiesen werden darf, ist auch noch die zum Netzwerk gehörige 
+
+  Broadcastadresse reserviert, die im Bereich der Host-ID acht mal die 1, also 
+
+  den Dezimalwert 255 enthält. Damit sollte klar sein, dass in einem Klasse-C-Netz 
+
+  lediglich 254 Hosts mit den Adressen </span><span class="text_kursiv">X.X.X.1 
+
+  - X.X.X.254</span><span class="text"> adressierbar sind und Analoges gilt für 
+
+  die anderen Netzklassen.<br>
+
+  </span><br>
+
+  Daneben treten speziell in Routingtabellen <span class="text_fett">ungültige 
+
+  IP-Adressen</span> auf, die ebenfalls nicht vergeben werden dürfen. Sie 
+
+  haben folgende Bedeutung, wobei das Beispiel für ein Klasse-B-Netz gilt:<br>
+
+</p>
+
+<table align="center" border="0" width="608">
+
+  <tbody><tr> 
+
+    <td class="text_kursiv_zent" width="21">0.0.0.0</td>
+
+    <td class="text_kursiv_zent" width="336">beliebiger Host mit Netzwerk und 
+
+      Host-ID</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="21">0.0.x.x</td>
+
+    <td class="text_kursiv_zent" width="336">Host in beliebigem Netz</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="21">255.255.255.255</td>
+
+    <td class="text_kursiv_zent" width="336">Broadcast im lokalen Netz</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="21">x.x.255.255</td>
+
+    <td class="text_kursiv_zent" width="336">Broadcast im angegebenen Netz</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="21">127.0.0.0</td>
+
+    <td class="text_kursiv_zent" width="336">Loopbackadresse für Testzwecke</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="21">127.0.0.1</td>
+
+    <td class="text_kursiv_zent" width="336">Host bei Loopback</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text">Wir sind damit in der Lage, eine Routingtabelle zu analysieren. 
+
+  Wir betrachten dazu noch einmal die drei Netze aus dem Kapitel über Router 
+
+  samt der nun etwas komplexeren Routingtabelle auf Router 01, die natürlich 
+
+  als Beispiel aufzufassen ist:</p>
+
+<table align="center" border="0" width="851">
+
+  <tbody><tr> 
+
+    <td width="353"> 
+
+      <div align="center"><img src="./ip_files/router.gif" height="360" width="350"></div>
+
+    </td>
+
+    <td width="488"> 
+
+      <table border="1" width="600">
+
+        <tbody><tr bgcolor="#003399"> 
+
+          <td colspan="5" class="text_fett_zent"><font color="#cccccc">Routingtabelle 
+
+            Router 01</font></td>
+
+        </tr>
+
+        <tr bgcolor="#003399"> 
+
+          <td class="text_fett_zent" width="22%"><font color="#cccccc">Netzwerkziel</font></td>
+
+          <td class="text_fett_zent" width="22%"><font color="#cccccc">Netzwerkmaske</font></td>
+
+          <td class="text_fett_zent" width="22%"><font color="#cccccc">Gateway</font></td>
+
+          <td class="text_fett_zent" width="22%"><font color="#cccccc">Schnittstelle</font></td>
+
+          <td class="text_fett_zent" width="48"><font color="#cccccc">Anzahl</font></td>
+
+        </tr>
+
+        <tr> 
+
+          <td class="text_kursiv_zent" width="22%">192.168.1.0</td>
+
+          <td class="text_kursiv_zent" width="22%">255.255.255.0</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.1.1</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.1.1</td>
+
+          <td class="text_kursiv_zent" width="48">1</td>
+
+        </tr>
+
+        <tr> 
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.0</td>
+
+          <td class="text_kursiv_zent" width="22%">255.255.255.0</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.1</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.1</td>
+
+          <td class="text_kursiv_zent" width="48">1</td>
+
+        </tr>
+
+        <tr> 
+
+          <td class="text_kursiv_zent" width="22%">192.168.2.0</td>
+
+          <td class="text_kursiv_zent" width="22%">255.255.255.0</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.2</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.1</td>
+
+          <td class="text_kursiv_zent" width="48">2</td>
+
+        </tr>
+
+        <tr> 
+
+          <td class="text_kursiv_zent" width="22%">0.0.0.0</td>
+
+          <td class="text_kursiv_zent" width="22%">0.0.0.0</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.2</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.1</td>
+
+          <td class="text_kursiv_zent" width="48">1</td>
+
+        </tr>
+
+        <tr> 
+
+          <td class="text_kursiv_zent" width="22%">255.255.255.255</td>
+
+          <td class="text_kursiv_zent" width="22%">255.255.255.255</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.1</td>
+
+          <td class="text_kursiv_zent" width="22%">192.168.0.1</td>
+
+          <td class="text_kursiv_zent" width="48">1</td>
+
+        </tr>
+
+        <tr> 
+
+          <td class="text_kursiv_zent" width="22%">127.0.0.0</td>
+
+          <td class="text_kursiv_zent" width="22%">255.0.0.0</td>
+
+          <td class="text_kursiv_zent" width="22%">127.0.0.1</td>
+
+          <td class="text_kursiv_zent" width="22%">127.0.0.1</td>
+
+          <td class="text_kursiv_zent" width="48">1</td>
+
+        </tr>
+
+      </tbody></table>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text"><br>
+
+  Die ersten beiden Zeilen routen Datagramme in die entsprechenden Netzwerke über 
+
+  die geeigneten Schnittstellen bzw. Gateways, Zeile 3 routet ins Netzwerk <span class="text_kursiv">192.168.2.0</span>,
+Zeile 4 setzt eine Defaultroute in der Annahme, dass es im Netzwerk
+192.168.2.0 noch weitere Router gibt, Zeile 5 routet Broadcasts, Zeile
+6 schickt Loop-Backs an den Router selbst.</p>
+
+<p class="text">Routingtabellen können noch wesentlich komplizierter aussehen, 
+
+  vor allem dann, wenn Subnetze zu bedienen sind oder Mehrfachwege zu anderen 
+
+  Routern programmiert sind. Die Erstellung der Tabellen erfolgt natürlich 
+
+  in der Regel softwareunterstützt, ihre Wartung wird zum Teil von eigenen 
+
+  Protokollen wie RIP, IGRP, OSPF oder NLSP bewerkstelligt, wobei Teile von Routingtabellen 
+
+  von einem Router zum anderen übertragen oder Algorithmen zur Wegzeitverkürzung 
+
+  angewendet werden.</p>
+
+<p class="text">Grundsätzlich ist die Vergabe der Netz-ID in einem LAN völlig 
+
+  frei, jedenfalls solange sichergestellt ist, dass das Netz nicht mit größeren 
+
+  Netzwerken wie etwa dem Internet verbunden wird. Im Internet dürfen IP-Adressen 
+
+  - mit Ausnahmen - weltweit nur einmal vergeben werden, damit die Datagramme 
+
+  richtig zugestellt werden können. Eine statische oder dynamische IP-Adresse 
+
+  muss dann beantragt werden. Verfügungsgewalt über die IP-Adressen 
+
+  hat die in den USA ansässige <span class="text_fett"><a href="http://www.internic.net%20/">IANA</a></span> 
+
+  (Internet Assigned Numbers Authority). Die Mieter solcher IP-Adressen sind öffentlich, 
+
+  sie können in der <span class="text_fett">Whois-DB</span> der <a href="http://www.ripe.net/" class="text_fett">RIPE 
+
+  NCC</a> (Réseaux IP Européens Network Coordination Centre) abgefragt 
+
+  werden, die die Europa zugeteilten IP-Adressen verwaltet. In der Praxis erhält 
+
+  ein Host seine IP-Adresse vom zuständigen Provider, sie ist das, was im 
+
+  Volksmund <span class="text_kursiv">Internetzugang</span> heißt.</p>
+
+<p class="text">Damit Netzwerke mit TCP/IP betrieben werden können ohne IP-Adressen 
+
+  zu mieten, wurden einige IP-Ranges freigegeben. Diese Adressen werden im Internet 
+
+  nicht geroutet und dürfen von jedermann kostenfrei verwendet werden.<br>
+
+</p>
+
+<table align="center" border="1" width="400">
+
+  <tbody><tr bgcolor="#000099"> 
+
+    <td class="text_fett_zent" width="88"><font color="#cccccc">Netzklasse</font></td>
+
+    <td class="text_fett_zent" width="89"><font color="#cccccc">Anzahl</font></td>
+
+    <td class="text_fett_zent" width="201"><font color="#cccccc">IP-Range</font></td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="88">A</td>
+
+    <td class="text_kursiv_zent" width="89">1</td>
+
+    <td class="text_kursiv_zent" width="201">10.x.x.x</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" width="88">B</td>
+
+    <td class="text_kursiv_zent" width="89">16</td>
+
+    <td class="text_kursiv_zent" width="201">172.16.x.x - 172.31.x.x</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_kursiv_zent" height="5" width="88">C</td>
+
+    <td class="text_kursiv_zent" height="5" width="89">256</td>
+
+    <td class="text_kursiv_zent" height="5" width="201"> 192.168.x.x</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text"><br>
+
+  Die IANA hat auch das Klasse-B-Netz <span class="text_kursiv">169.254.0.0</span> 
+
+  für private Netze reserviert. Es wird von Applehosts mit dem Protokoll 
+
+  <span class="text_kursiv"><strong>Rendevouz</strong></span> und von Microsofthosts mit dem Protokoll<strong> APIPA</strong> (Automatic Private IP Addressing) verwendet und teilt jedem Host automatisch 
+
+  eine IP-Adresse aus diesem Adressraum zu, falls ein DHCP-Server nicht erreichbar 
+
+  ist. <br>
+
+  <br>
+
+  Trotz ihrer scheinbar großen Anzahl, reichen die zur Verfügung stehenden 
+
+  IP-Adressen schon lange nicht mehr aus.  Abhilfe schaffen drei Maßnahmen:</p>
+
+<ul>
+
+  <li class="text"><span class="text_fett">Dynamische IP-Adressen</span> werden 
+
+    nur für die Dauer der Verbindung zugewiesen. Das in diesem Zusammenhang 
+
+    bekannteste Protokoll ist das <span class="text_fett">DHCP</span>-Protokoll 
+
+    (dynamic host configuration protocol) und wird von Dial-In-Providern oder 
+
+    in Netzwerken verwendet, die ein Einbinden beliebiger Notebooks ermöglichen.</li>
+
+  <li class="text"><span class="text_fett">IP Version 6 (IPv6)</span><span class="text">: Die aktuelle Version 
+
+    des Internetprotokolls mit einer Adresslänge von 32 Bit wird auf eine 
+
+    Adresslänge von 128 Bit erweitert.</span></li>
+
+  <li><span class="text_fett">NAT</span><span class="text"> (Network Address Translation): 
+
+    Beim NAT werden die Adressen eines privaten Netzes über Tabellen öffentlich 
+
+    registrierten IP-Adressen zugeordnet, die nur bei Bedarf vergeben werden. 
+
+    Die netzinterne Kommunikation erfolgt über private Adressen.</span></li>
+
+  <li class="text"><span class="text_fett">IP Masquerading</span>, das manchmal 
+
+    auch als PAT (Port and Address Translation) bezeichnet wird, bildet alle Adressen 
+
+    eines privaten Netzwerkes auf eine einzelne öffentliche IP-Adresse ab. 
+
+    Dies geschieht dadurch, dass internetseitig bei einer existierenden Verbindung 
+
+    zusätzlich zu den Adressen auch die TCP-Portnummern ausgetauscht werden. 
+
+    Die lokalen Hosts sind aus dem Internet nicht zu sehen, was hinsichtlich der 
+
+    Sicherheit günstig ist.</li>
+
+</ul>
+
+<p class="ueberschrift_3">Subnetze</p>
+
+<p class="text">dienen dazu, innerhalb der schon definierten Netzklassen durch 
+
+  Router getrennte Teilnetze zu bilden. Dadurch wird eine Strukturierung von Netzwerken 
+
+  innerhalb einer Netzklasse ermöglicht. Bei der Konstruktion ist sicherzustellen, 
+
+  dass die beteiligten Router Host-ID und Teilnetz-ID trennen können. Das 
+
+  geschieht durch Setzen einer sogenannten <span class="text_fett">Subnetzmaske</span>, 
+
+  die die IP-Adresse auch innerhalb der Bytes trennt, ansonsten aber gleich operiert.</p>
+
+<p class="text">Es ergeben sich für das zweite, dritte und vierte Byte:</p>
+
+<table align="center" width="513">
+
+  <tbody><tr bgcolor="#000099"> 
+
+    <td class="text_fett_zent" width="191"><font color="#cccccc">Subnetzmaske 
+
+      (pro Byte)</font></td>
+
+    <td class="text_fett_zent" colspan="8"><font color="#cccccc">Hostanteil</font></td>
+
+    <td class="text_fett_zent" width="107"><font color="#cccccc">Anzahl</font></td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="191">128</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" colspan="7" bgcolor="#00ff00">7 Bit</td>
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="107">126</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="191">192</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" colspan="6" bgcolor="#00ff00">6 Bit</td>
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="107">62</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="191">224</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" colspan="5" bgcolor="#00ff00">5 Bit</td>
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="107">30</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="191">240</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" colspan="4" bgcolor="#00ff00">4 Bit</td>
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="107">14</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="191">248</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" colspan="3" bgcolor="#00ff00">3 Bit</td>
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="107">6</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="191">252</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+    <td class="text_kursiv_zent" colspan="2" bgcolor="#00ff00" width="40">2 Bit</td>
+
+    <td class="text_fett_zent" bgcolor="#cccccc" width="107">2</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text">Die Spalte Hostanteil zeigt, wieviele - hier auf 1 gesetzte - 
+
+  Bits des <span class="text_kursiv">Maskierbytes</span> durch die in der linken 
+
+  Spalte stehende Subnetzmaske auf die Netz-ID entfallen. Wird also zum Beispiel 
+
+  in einem Klasse-B-Netz eine Subnetzmaske <span class="text_kursiv">255.255.224.0</span> 
+
+  gesetzt, so verbleibt im dritten Byte ein Hostanteil von 5 Bit (Zeile 3). Weil 
+
+  die Randadressen für Netzwerkadresse und Broadcastadresse reserviert sind, 
+
+  können im dritten Byte 30 Adressen vergeben werden, die natürlich 
+
+  mit allen zulässigen Adressen des vierten Bytes kombiniert werden dürfen. 
+
+  Es wären also 30*254 Hosts adressierbar.</p>
+
+<p class="text">Zum besseren Verständnis der Tabelle dient:</p>
+
+<ul>
+
+  <li class="text">Weil die Subnetzmaske die Netz-ID mit <span class="text_kursiv">1en</span> 
+
+    maskiert, erhält man die linke Spalte, indem man den gesetzten Hostanteil 
+
+    mit Nullen auffüllt. Es ist zum Beispiel 248=DEZ(<span class="text_kursiv">11111000</span>)</li>
+
+  <li class="text">Ist der Hostanteil der IP-Adresse <span class="text_fett_kursiv">m</span> 
+
+    Bits, dann erhält man <span class="text_fett_kursiv">2<sup>m</sup> - 
+
+    2</span> Hosts pro Subnetz.</li>
+
+  <li class="text">Ist der Netzwerkanteil der IP-Adresse <span class="text_fett_kursiv">n</span> 
+
+    Bits, dann erhält man <span class="text_fett_kursiv">2<sup>n</sup> - 
+
+    2</span> Subnetze. Das ist der ursprüngliche Standard. Mittlerweile gestatten 
+
+    fast alle Systeme den Einsatz von Subnetzen, in denen alle Subnetzbits den 
+
+    Wert 0 oder 1 haben.</li>
+
+  <li class="text">Die Zahl im Maskierbyte kann auch mit <span class="text_fett_kursiv">Maskierbyte 
+
+    = 256 - Hostanzahl-2</span> erhalten werden.</li>
+
+</ul>
+
+<p class="text">Wir zeigen im Folgenden <span class="text_fett">Subnetting</span> 
+
+  an einem einfachen Beispiel:</p>
+
+<p class="text">Das Netzwerk der Klasse C <span class="text_kursiv">192.168.1.0</span> 
+
+  soll in Subnetze aufgeteilt werden, in denen jeweils 30 Hosts adressierbar sind.</p>
+
+<ol>
+
+  <li class="text">Wir berechnen mit Hilfe der Formel das Maskierbyte mit <span class="text_kursiv">256-30-2=</span><span class="text_fett_kursiv">224</span> 
+
+    und überzeugen uns, dass das auch die obige Tabelle liefert.</li>
+
+  <li class="text">Aufgrund der Netzklasse C ergibt sich damit eine Subnetzmaske: 
+
+    <span class="text_fett_kursiv">255.255.255.224</span></li>
+
+  <li class="text">Der Netzanteil im Maskierbyte hat eine Länge von 3 Bit, 
+
+    weshalb wir <span class="text_fett_kursiv">8(6) Subnetze</span> erwarten dürfen, 
+
+    deren Subnetzadressen tabellarisch ermittelt werden können. Dabei sind 
+
+    lediglich die Hostanteile mit 0 aufzufüllen. Das erste Subnetz ist problematisch, 
+
+    weil seine Subnetz-ID die Netzadresse des gegebenen Klasse-C Netzes ist.<br>
+
+    <br>
+
+    <table align="center" border="0" width="325">
+
+      <tbody><tr bgcolor="#000099"> 
+
+        <td colspan="8" class="text_fett_zent"><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">Maskierbyte</font></td>
+
+        <td class="text_fett_zent" width="119"><font color="#cccccc">Subnetz-ID</font></td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="119">192.168.1.0</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.32</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.64</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.96</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.128</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.160</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.192</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.224</td>
+
+      </tr>
+
+    </tbody></table>
+
+    <br>
+
+    An dieser Stelle sei erwähnt, dass in der einschlägigen Literatur 
+
+    die Darstellung der Netzklassen und Subnetze gelegentlich auch in der Form 
+
+    <span class="text_fett_kursiv">Netzadresse/Anzahl der Netzbits</span> erfolgt. 
+
+    Das dritte Subnetz wäre demnach durch <span class="text_fett_kursiv">192.168.1.64/27</span> 
+
+    beschreibbar.<br>
+
+    <br>
+
+  </li>
+
+  <li class="text">Die Broadcastadressen der Subnetze enthalten in den Hostteilen 
+
+    überall 1. Das letzte Subnetz ist problematisch, weil seine Broadcastadresse 
+
+    mit der des gegebenen C-Netzes übereinstimmt.<br>
+
+    <br>
+
+    <table align="center" border="0" width="325">
+
+      <tbody><tr> 
+
+        <td colspan="8" class="text_fett_zent" bgcolor="#000099"><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">Maskierbyte</font></td>
+
+        <td class="text_fett_zent" bgcolor="#000099" width="119"><font color="#cccccc">Broadcast</font></td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.31</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.63</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.95</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.127</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.159</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.191</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.223</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="119">192.168.1.255</td>
+
+      </tr>
+
+    </tbody></table>
+
+    <br>
+
+    <br>
+
+  </li>
+
+  <li class="text">Der Bereichsanfang ergibt sich, wenn man alle Hostbits auf 
+
+    0 und das letzte Bit auf 1 setzt.<br>
+
+    <br>
+
+    <table align="center" border="0" width="325">
+
+      <tbody><tr> 
+
+        <td colspan="8" class="text_fett_zent" bgcolor="#000099"><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">Maskierbyte</font></td>
+
+        <td class="text_fett_zent" bgcolor="#000099" width="119"><font color="#cccccc">Bereichsanfang</font></td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.1</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.33</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.65</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.97</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.129</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.161</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.193</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.225</td>
+
+      </tr>
+
+    </tbody></table>
+
+    <br>
+
+    <br>
+
+    <br>
+
+  </li>
+
+  <li class="text">Das Bereichsende erhält man, indem man alle Hostbits auf 
+
+    1 und nur das letzte Bit auf 0 setzt.<br>
+
+    <br>
+
+    <table align="center" border="0" width="325">
+
+      <tbody><tr> 
+
+        <td colspan="8" class="text_fett_zent" bgcolor="#000099"><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">&nbsp;</font><font color="#cccccc">Maskierbyte</font></td>
+
+        <td class="text_fett_zent" bgcolor="#000099" width="119"><font color="#cccccc">Bereichsende</font></td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.30</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.62</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.94</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.126</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.158</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.190</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.222</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#ff0000" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">1</td>
+
+        <td class="text_kursiv_zent" bgcolor="#00ff00" width="20">0</td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc" width="119">192.168.1.254</td>
+
+      </tr>
+
+    </tbody></table>
+
+  </li>
+
+</ol>
+
+<p class="text">Damit sind die Vorbereitungen getroffen. Es sei noch erwähnt, 
+
+  dass speziell Internet Service Provider Verfahren zur Verfügung haben, 
+
+  die auch die problematischen Randbereiche ohne Konflikt mit den übergeordneten 
+
+  Netzklassen routen (<span class="text_fett">CIDR - classless internet domain 
+
+  routing</span>).</p>
+
+<p class="text">Die tatsächliche Konfiguration des Subnetzes <span class="text_kursiv">192.168.1.64/27</span> 
+
+  (Zeile 3) als Subnetz von <span class="text_kursiv">192.168.1.0/24</span> (siehe 
+
+  obiges Beispiel) erfolgt nun in drei Schritten:</p>
+
+<ul>
+
+  <li class="text">Wir wählen ein Gateway für das Subnetz aus dem zulässigen 
+
+    Bereich, wobei wir die erste IP-Adresse verwenden: <span class="text_kursiv">192.168.1.65. 
+
+    </span>Es wäre auch möglich und durchaus üblich, das Gateway 
+
+    <span class="text_kursiv">192.168.1.1</span> des übergeordneten C-Netzes 
+
+    <span class="text_kursiv">192.168.1.0/24 </span>zu verwenden.</li>
+
+  <li class="text">Auf einem Host wird beim IP-Protokoll eingestellt:<br>
+
+    <br>
+
+    <table align="center" border="1" width="300">
+
+      <tbody><tr> 
+
+        <td class="text_fett" bgcolor="#000099"><font color="#cccccc">IP-Adresse</font></td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc">192.168.1.66 (-94)</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_fett" bgcolor="#000099"><font color="#cccccc">Subnetzmaske</font></td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc">255.255.255.224</td>
+
+      </tr>
+
+      <tr> 
+
+        <td class="text_fett" bgcolor="#000099"><font color="#cccccc">Gateway</font></td>
+
+        <td class="text_kursiv_zent" bgcolor="#cccccc">192.168.1.65</td>
+
+      </tr>
+
+    </tbody></table>
+
+    <br>
+
+    <br>
+
+  </li>
+
+  <li class="text">Der das Subnetz versorgende Router ist zu konfigurieren, wir 
+
+    zitieren hier nur die für die Kommunikation der beiden Netze massgeblichen 
+
+    Routen:<br>
+
+    <br>
+
+    <table align="center" border="0" width="821">
+
+      <tbody><tr> 
+
+        <td width="150"><img src="./ip_files/router_sub.gif" height="320" width="150"></td>
+
+        <td width="23">&nbsp;</td>
+
+        <td width="578"> 
+
+          <div align="right"> 
+
+            <table align="center" border="1" width="600">
+
+              <tbody><tr bgcolor="#003399"> 
+
+                <td colspan="5" class="text_fett_zent"><font color="#cccccc">Routingtabelle</font></td>
+
+              </tr>
+
+              <tr bgcolor="#003399"> 
+
+                <td class="text_fett_zent" width="22%"><font color="#cccccc">Netzwerkziel</font></td>
+
+                <td class="text_fett_zent" width="22%"><font color="#cccccc">Netzwerkmaske</font></td>
+
+                <td class="text_fett_zent" width="22%"><font color="#cccccc">Gateway</font></td>
+
+                <td class="text_fett_zent" width="22%"><font color="#cccccc">Schnittstelle</font></td>
+
+                <td class="text_fett_zent" width="48"><font color="#cccccc">Anzahl</font></td>
+
+              </tr>
+
+              <tr> 
+
+                <td class="text_kursiv_zent" width="22%">192.168.1.64</td>
+
+                <td class="text_kursiv_zent" width="22%">255.255.255.224</td>
+
+                <td class="text_kursiv_zent" width="22%">192.168.1.65</td>
+
+                <td class="text_kursiv_zent" width="22%">192.168.1.65</td>
+
+                <td class="text_kursiv_zent" width="48">1</td>
+
+              </tr>
+
+              <tr> 
+
+                <td class="text_kursiv_zent" width="22%">192.168.1.0</td>
+
+                <td class="text_kursiv_zent" width="22%">255.255.255.0</td>
+
+                <td class="text_kursiv_zent" width="22%">192.168.1.1</td>
+
+                <td class="text_kursiv_zent" width="22%">192.168.1.1</td>
+
+                <td class="text_kursiv_zent" width="48">1</td>
+
+              </tr>
+
+            </tbody></table>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    </tbody></table>
+
+    <br>
+
+  </li>
+
+</ul>
+
+<!-- #EndEditable -->
+
+<hr>
+
+<!-- #BeginEditable "Link" --> 
+
+<table align="center" border="0" height="51" width="201">
+
+  <tbody><tr> 
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_protokolle.html"><img src="./ip_files/buli_lo.jpg" alt="zurück" name="Image1" onmouseover="MM_swapImage(&#39;Image1&#39;,&#39;&#39;,&#39;button/buli_hi.jpg&#39;,1)" onmouseout="MM_swapImgRestore()" border="0" height="20" width="30"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/index.html"><img src="./ip_files/buob_lo.jpg" name="oben" onmouseover="MM_swapImage(&#39;oben&#39;,&#39;&#39;,&#39;button/buob_hi.jpg&#39;,1)" alt="Inhalt" onmouseout="MM_swapImgRestore()" border="0" height="30" width="20"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_arp.html"><img src="./ip_files/bure_lo.jpg" alt="vor" name="Image2" onmouseover="MM_swapImage(&#39;Image2&#39;,&#39;&#39;,&#39;button/bure_hi.jpg&#39;,1)" onmouseout="MM_swapImgRestore()" border="0" height="20" width="30"></a></div>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<!-- #EndEditable -->
+
+<p class="text">&nbsp;</p>
+
+<!-- #EndTemplate --></body></html>

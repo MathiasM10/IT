@@ -1,0 +1,633 @@
+
+<!-- saved from url=(0039)http://graf.tgm.ac.at/BUN/nw_hprot.html -->
+<html><!-- #BeginTemplate "/BSNW/Templates/skriptum.dwt" --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<!-- #BeginEditable "doctitle" --> 
+
+<title>BSNW Netze</title>
+
+<!-- #EndEditable --> 
+
+
+
+<link rel="stylesheet" href="./protokolle_files/bsnw.css" type="text/css">
+
+<script language="JavaScript">
+
+<!--
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.0
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script>
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onload="MM_preloadImages(&#39;button/buob_hi.jpg&#39;,&#39;button/buli_hi.jpg&#39;,&#39;button/bure_hi.jpg&#39;)">
+<!-- #BeginEditable "Text" --> 
+<p class="ueberschrift_2">2.3.4 Höhere Protokolle</p>
+<p class="text">Wir beschreiben im Folgenden, zum Teil sehr grob, einige höhere 
+  Protokolle der TCP/IP-Protokollfamilie. Diese Protokolle wirken allesamt auf 
+  den OSI-Layern 5 bis 7. Sie starten Prozesse, die die Schnittstellen einerseits 
+  zum TCP/UDP-Protokoll über Ports, anderseits zu den eigentlichen Anwendungen 
+  herstellen. Diese Protokolle, die in vielen Fällen auch <span class="text_fett">Dienste</span> 
+  genannt werden, verfügen in der Regel über Konsolenschnittstellen, 
+  die ihre Administration ohne zusätzliche Software ermöglichen. Ihre 
+  konfigurierbaren Eigenschaften werden oft auch in den eigentlichen Anwendungen 
+  getroffen, die Administration erfolgt dann durch Konfiguration der Anwendung.</p>
+<p class="ueberschrift_3">DHCP</p>
+<p class="text">Das DHCP-Protokoll (Dynamic Host Configuration Protocol) ermöglicht 
+  es, Clients in ein LAN automatisiert einzufügen. Dabei werden dem Client 
+  eine IP-Adresse, der Netzwerkname, die Gatewayadresse uam. beim Start des Betriebssystems 
+  zugewiesen. Die Zuweisung der IP-Adresse erfolgt dabei entweder dynamisch aus 
+  einem Adresspool oder statisch in Verbindung mit der MAC-Adresse des Ethernetadapters. 
+  Eine derart zugewiesene IP-Adresse wird vom DHCP-Server grundsätzlich verliehen, 
+  der Client erhält ein <span class="text_fett">Lease</span> auf eine bestimmte 
+  Zeit, das nach dessen Ablauf allenfalls automatisch verlängert wird. Eingeschaltet 
+  wird der Dienst in den Konfigurationsoptionen des IP-Protokolls durch Wahl der 
+  Option, eine IP-Adresse <span class="text_fett">automatisch</span> zu <span class="text_fett">beziehen</span>. 
+  Der Dienst arbeitet plattformunabhängig, das heißt es können 
+  etwa Windows und Unixrechner eines Netzes versorgt werden.</p>
+<p class="text">Der DHCP-Server hat also grundsätzlich drei Betriebsmodi:</p>
+<ul>
+  <li class="text"><span class="text_fett">Automatic Allocation:</span> Fordert 
+    ein Client eine IP-Nummer an, wird sie ihm auf unbegrenzte Zeit zugeteilt. 
+    Sind alle Adressen aus dem freigegebenen Adresspool verbraucht, kann kein 
+    neuer Client mehr konfiguriert werden. Das gilt auch, wenn ein Teil der zuvor 
+    bedienten Rechner im Moment gar nicht eingeschaltet ist.</li>
+  <li class="text"><span class="text_fett">Dynamic Allocation:</span> Die Zuweisung 
+    erfolgt wie bei der Automatic Allocation. Allerdings wird jetzt die IP-Nummer 
+    nur für eine bestimmte, maximale Zeitspanne <span class="text_fett">(Lease-Time</span>) 
+    vergeben, kann allerdings vom DHCP-Client innerhalb dieser Zeit durch Abmelden 
+    des Rechners zurückgegeben werden. Diese Betriebsart erlaubt es kleine 
+    IP-Nummern-Pools mit einer großen Anzahl von Rechnern zu teilen. Diese 
+    Betriebsart ist vor allem dann günstig, wenn Notebooks an das Netz genommen 
+    werden sollen, deren IPs nach dem Trennen wieder zur Verfügung stehen 
+    sollen.</li>
+  <li><span class="text_fett">Manual Allocation:</span><span class="text"> In 
+    dieser Betriebsart ist für jeden Client im Netzwerk eine IP-Nummer fest 
+    zugeordnet, was konfigurationstechnisch über die MAC-Adresse seines Netzwerkadapters 
+    passiert. Der Server ist lediglich für die Auslieferung der Adresse an 
+    den Client verantwortlich. Eingesetzt wird diese Konfiguration zum Beispiel, 
+    wenn ein Client, der mit mehreren Bootsystemen ausgestattet ist, zuverlässig 
+    ans Netz gehen soll oder wenn die MAC-Adresse des Clients zur Authentifizierung 
+    verwendet wird.</span></li>
+</ul>
+<p><span class="text">Eine DHCP-Sitzung läuft folgendermaßen ab:</span></p>
+<table width="843" align="center">
+  <tbody><tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPDISCOVER</td>
+    <td class="text" width="707">Client sucht DHCP-Server durch Broadcast an 255.255.255.255</td>
+  </tr>
+  <tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPOFFER</td>
+    <td class="text" width="707">DHCP-Server schickt Konfigurationsangebot</td>
+  </tr>
+  <tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPNACK</td>
+    <td class="text" width="707">DHCP-Server lehnt den Client ab</td>
+  </tr>
+  <tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPREQUEST</td>
+    <td class="text" width="707">Client wählt (aus mehreren Angeboten) ein 
+      Angebot aus und bestätigt</td>
+  </tr>
+  <tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPDECLINE</td>
+    <td class="text" width="707">Client lehnt Angebot ab</td>
+  </tr>
+  <tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPACK</td>
+    <td class="text" width="707">Server bestätigt dem Client das Lease</td>
+  </tr>
+  <tr> 
+    <td class="text_fett" width="124" bgcolor="#CCCCCC">DHCPRELEASE</td>
+    <td class="text" width="707">Client kündigt Lease vorzeitig</td>
+  </tr>
+</tbody></table>
+<p class="text">Weiters wird während der Sitzung mit ARP oder ICMP geprüft, 
+  ob MAC-Adresskonflikte zu erwarten sind. Weiters versuchen DHCP-Clients schon 
+  vor Ablauf eines Lease, eine Verlängerung zu erhalten. Für die Administration 
+  ist wesentlich, dass das DHCP-Protokoll keine Möglichkeit vorsieht, eine 
+  vergebene IP-Adresse zu entziehen.</p>
+<p class="text">Wird bei einem DHCPDISCOVER kein DHCP Server gefunden und gibt 
+  es auch keine manuelle IP-Konfiguration, so weisen Microsoft Betriebssysteme 
+  ab Windows 98 automatische eine Adresse aus dem von der <a href="http://www.iana.org/" target="_blank">IANA</a> 
+  in <a href="http://www.ietf.org/rfc/rfc3330.txt" target="_blank">RFC 3330</a> 
+  genormten <span class="text_kursiv">local link Block</span> (169.254.0.0/16) 
+  zu, womit ebenfalls Subnetze entstehen. Dieses Verfahren wird als <span class="text_fett">Automatic 
+  Private IP Adressing (APIPA)</span> bezeichnet und kann abgeschaltet werden, 
+  indem man in</p>
+<p class="quellcode">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces</p>
+<p class="text">einen neuen DWORD-Wert: <span class="text_kursiv">IPAutoconfigurationEnable 
+  </span>mit dem Wert 0 erstellt.</p>
+<p class="ueberschrift_3">RADIUS</p>
+<p class="text">Das RADIUS-Protokoll (Remote Authentication and Dial-In User Service) 
+  vermittelt den Zugang zu einem Netzwerk über Wählleitungen (Telefon, 
+  ISDN, ADSL), und vermittelt einen gesicherten und authentifizierten Zugriff 
+  auf das Netzwerk von außen. Es arbeitet nach dem Client-Server-Prinzip: 
+  Ein im LAN befindlicher RADIUS-Server verwaltet zentral die Zugangsberechtigungen 
+  der Remote-User. Wählt sich ein User ein, so tut er dies über einen 
+  Modemserver (RAS-Server, Remote Access Server), der üblicherweise außerhalb 
+  einer allfälligen Firewall steht. Der RAS-Server besorgt nun mit Hilfe 
+  von RADIUS von einem im Netz befindlichen zentralen RADIUS-Server die entsprechenden 
+  Authentifizierungsdaten, und schaltet im günstigen Fall den entfernten 
+  Client ans Netz. Dieser Client vrhält sich dann so, als ob er im LAN wäre, 
+  als Schicht 2 Übertragungsprotokolle werden <span class="text_fett">PPP</span> 
+  (Point to Point Protokoll), ein Protokoll, das mit dem IP-Protokoll kommuniziert, 
+  oder das veraltete <span class="text_fett">SLIP</span> (Serial Line Internet 
+  Protokoll) verwendet. In der Apple-Welt ist <span class="text_fett">ARAv2</span> 
+  (Apple Remote Access Version 2) bekannt.</p>
+<p class="text_zent"><img src="./protokolle_files/radius.gif" width="650" height="291"></p>
+<p class="text">Das RADIUS-Protokoll selbst erlaubt eine zentrale Verwaltung der 
+  Dial-In-Zugänge. Auch mehrere RAS-Server können bedient werden, die 
+  Vergabe der IP-Adressen erfolgt für gewöhnlich mit DHCP dynamisch. 
+  RADIUS selbst setzt auf dem UDP-Protokoll auf, seine Paketstruktur ist einfach, 
+  weil lediglich die Authentifizierungsdaten übertragen werden. Sicherheitstechnisch 
+  bedeutungsvoll ist das Authenticatorfeld, in dem Fingerprints oder die verschlüsselten 
+  geheimen Zugangsdaten übertragen werden. Es hat eine Länge von 128 
+  Bit, was eine gewisse Sicherheit vor Hackerattacken bietet, zumal damit</p>
+<p class="text_kursiv_zent">2<sup>128</sup> = 3,4*10<sup>38</sup></p>
+<p class="text">Bitmuster möglich sind.</p>
+<p class="ueberschrift_3">SMTP</p>
+<p class="text">Das SMTP (Simple Mail Transfer Protocol) stammt in seiner ursprünglichen 
+  Form aus dem Jahre 1982 und ist, abgesehen von kleinen Erweiterungen, die offiziell 
+  ESMTP (für Extended SMTP) heißen, unverändert geblieben. Es 
+  ist das Übermittlungsprotokoll für Emailnachrichten in Textform. Sein 
+  Datenrahmen enthält im Wesentlichen die Felder, die im Kopf einer Emailnachricht 
+  zu finden sind, also Systemname, Absender und Empfängeradresse und natürlich 
+  die Nachricht selbst. Zusätzlich sind noch Unterstützung von Mailinglisten 
+  oder das Einholen von Empfängerbestätigungen eingebaut. Das Protokoll 
+  arbeitet verbindungsorientiert, eine Verbindung zwischen Sender und Empfänger 
+  wird hergestellt. Bei nicht ständig eingeschalteten Arbeitsstationen ergibt 
+  sich damit die Notwendigkeit, Emails zwischenzuspeichern damit sie zu einem 
+  späteren Zeitpunkt gelesen werden können. Das vermittelt</p>
+<p class="ueberschrift_3">POP</p>
+<p class="text">Das <span class="text">POP (Post Office Protokoll, eig. POP3) 
+  ist die derzeit gebräuchlichste Art, Emails über einen Provider zu 
+  erhalten. Dabei wird providerseitig ein POP-Server installiert, der in einem 
+  Spoolverzeichnis einkommende Emails speichert. Der eigentliche Empfänger, 
+  ein POP-Client kann zu einem späteren Zeitpunkt allenfalls über eine 
+  Dial-In-Verbindung seine Emails abholen, die anschließend auf dem POP-Server 
+  gelöscht werden.</span></p>
+<p class="text">Die Verbindung selbst ist eine TCP/UDP-Verbindung auf Port 110. 
+  Die POP3-Verbindung kennt mehrere Stufen, die unterschiedliche Befehlssätze 
+  kennen:</p>
+<table width="860" border="0" align="center" cellspacing="10">
+  <tbody><tr> 
+    <td bgcolor="#CCCCCC" class="text_fett_kursiv" width="159"><font color="#000066">Authorization 
+      State</font></td>
+    <td width="215" class="text">Identifikation des Clients am Server</td>
+    <td width="234" class="text">USER, PASS, QUIT </td>
+  </tr>
+  <tr> 
+    <td bgcolor="#CCCCCC" class="text_fett_kursiv" width="159" height="135"><font color="#000066">Transaction 
+      State</font></td>
+    <td width="215" class="text" height="135">Download oder Operationen zum Bearbeiten 
+      von Mails werden ausgeführt</td>
+    <td width="234" class="text" height="135">STAT - Anzahl der Mails und Größe 
+      der Mailbox<br>
+      LIST - Nummer und Größe aller Mails zurück<br>
+      RETR - Gibt die Mail aus<br>
+      DELE - Löscht Mail<br>
+      NOOP - Aufrechterhaltung der Verbindung, ohne Time-Out<br>
+      RSET - Verbindungsabbruch ohne <span class="text_kursiv">Transaction State</span><br>
+      QUIT - Beendet die Verbindung und führt alle gespeicherten Änderungen 
+      aus</td>
+  </tr>
+  <tr> 
+    <td bgcolor="#CCCCCC" class="text_fett_kursiv" width="159"><font color="#000066">Update 
+      State</font></td>
+    <td width="215" class="text">Der Server beendet die TCP-Verbindung und führt 
+      die vom Client im <span class="text_kursiv">Transaction State</span> angeforderten 
+      Änderungen durch</td>
+    <td width="234" class="text"> <br> <br> </td>
+  </tr>
+</tbody></table>
+<p class="text">Zusätzlich haben viele POP3-Server einen Timer, der die Verbindung 
+  trennt, falls eine einstellbare Zeitspanne von mindestens 10 Minuten inaktiv 
+  überschritten wird. Wird die Verbindung vom Timer beendet, wechselt der 
+  POP3-Server nicht in den Update State, sodass Änderungen auf dem Server 
+  nicht gespeichert werden.</p>
+<p class="ueberschrift_3">IMAP</p>
+<p class="text">Das IMAP (Internet Message Access Protocol) operiert funktionell 
+  wie das POP-Protokoll, es hat allerdings einen größeren Funktionsumfang 
+  und wird in naher Zukunft wahrscheinlich zum Standard werden. Es hat einen größeren 
+  und syntaktisch anderen Befehlssatz, die Kommunikation läuft über 
+  den TCP-Port 143. Die Erweiterungen betreffen im Wesentlichen folgende Punkte:</p>
+<ul>
+  <li class="text">Der Mailbody kann getrennt geladen werden.</li>
+  <li class="text">Attachements lassen sich getrennt abrufen.</li>
+  <li class="text">Mehrere Befehle können hintereinander, ohne auf eine Serverantwort 
+    zu warten, abgesetzt werden.</li>
+  <li class="text">Jedem Befehl wird eine Kennung vorangestellt, die Tag genannt 
+    wird.</li>
+  <li class="text">Es können mit einem Logon mehrere Mailboxen bearbeitet 
+    werden.</li>
+</ul>
+<p class="text">Der Verbindungsaufbau läuft in vier Stufen ab:</p>
+<table width="730" border="0" align="center" cellspacing="10">
+  <tbody><tr> 
+    <td class="text_fett_kursiv" bgcolor="#CCCCCC" width="176"><font color="#000099">Non-Authenticated 
+      State</font></td>
+    <td class="text" width="520">Der User muss sich gegenüber dem Server 
+      identifizieren.</td>
+  </tr>
+  <tr> 
+    <td class="text_fett_kursiv" bgcolor="#CCCCCC" width="176"><font color="#000099">Authenticated 
+      State</font></td>
+    <td class="text" width="520">Der User hat sich identifiziert und muss nun 
+      eine Mailbox auswählen.</td>
+  </tr>
+  <tr> 
+    <td class="text_fett_kursiv" bgcolor="#CCCCCC" width="176"><font color="#000099">Selected 
+      State</font></td>
+    <td class="text" width="520">Eine Mailbox wurde ausgewählt. Mailbox und 
+      Mails lassen sich bearbeiten.</td>
+  </tr>
+  <tr> 
+    <td class="text_fett_kursiv" bgcolor="#CCCCCC" width="176"><font color="#000099">Logout 
+      State</font></td>
+    <td class="text" width="520">Die Verbindung wird beendet; der Server führt 
+      noch anstehende Tätigkeiten aus.</td>
+  </tr>
+</tbody></table>
+<p class="text">POP3- und IMAP-Protokoll ist gemeinsam, dass sie das Abholen von 
+  Emails vom POP3- bzw. IMAP-Server des Providers vermitteln, während vom 
+  Client ausgehende Emails unmittelbar im SMTP-Protokoll verpackt und zum Empfänger 
+  oder zu dessen Mailbox geschickt werden.</p>
+<p class="text_zent"><img src="./protokolle_files/mail.gif" width="500" height="411"></p>
+<p class="text">Die Grafik zeigt die Kommunikationspfade zweier Emailclients, 
+  die über ISP (Internet Service Provider) miteinander kommunizieren.</p>
+<p class="ueberschrift_3">MIME</p>
+<p class="text">Das MIME-Protokoll (multipurpose Internet mail extensions) ist 
+  eine Erweiterung des Internet-E-Mail-Protokolls SMTP. Es gestattet eine einfachere 
+  Übertragung von Grafiken, Audio- und anderen binären Dateien, die 
+  kein Text sind. MIME teilt die verschiedenen Dateitypen in die Hauptgruppen 
+  Grafik, Video und Audio und definiert die dazugehörigen Dateitypen in Untergruppen 
+  genauer.<br>
+  Voraussetzung für den Empfang und die korrekte Darstellung dieser multimedialen 
+  elektronischen Post ist allerdings, dass das Mail-Programm des Empfängers 
+  ebenfalls den MIME-Standard unterstützt, wovon man bei nichtpuristischer 
+  Installation allerdings mittlerweile ausgehen darf.</p>
+<p class="ueberschrift_3">FTP</p>
+<p class="text">Das FTP (File Transfer Protokoll) dient der plattformübergreifeden 
+  Übertragung von beliebigen Dateien über das Internet, wobei ein Internethost, 
+  auf dem Dateien bereitgestellt sind, als <span class="text_fett">FTP-Server</span> 
+  und der abrufende Host als <span class="text_fett">FTP-Client</span> bezeichnet 
+  wird. Hinsichtlich der Übertragung wird der Transfer vom Client zum Server 
+  <span class="text_fett">upload</span> und vom Server zum Client als <span class="text_fett">download</span> 
+  bezeichnet. Zugriffe über das Netzwerk kennen aus Sicherheitsgründen 
+  zwei Betriebsmodi:</p>
+<ul>
+  <li class="text"><span class="text_fett">Benutzerspezifisches FTP:</span><span class="text"> 
+    Eine Anmeldung (Logon/Passwort) ist notwendig</span></li>
+  <li><span class="text_fett">Anonymous-FTP</span>: <span class="text">Benutzung 
+    ist ohne Anmeldung möglich </span></li>
+</ul>
+<p class="text">FTP verwendet als Transportprotokoll TCP, das einen gesicherten 
+  Datentransfer garantiert. Die FTP-Verbindung verwendet traditionell zwei verschiedene 
+  Kanäle, den <span class="text_fett">TCP-Port 21</span> als <span class="text_fett">Steuerungskanal</span> 
+  (<span class="text_kursiv">command port, control port</span>) und den <span class="text_fett">TCP-Port 
+  20</span> als <span class="text_fett">Datenkanal </span>(<span class="text_kursiv">data 
+  port</span>), die genormt sind und automatisch eingestellt werden. Die Verbindung 
+  selbst verläuft komplexer, man unterscheidet:</p>
+<ul>
+  <li class="text"><span class="text_fett">Active Mode</span>: 
+    <ul>
+      <li>Der Client verbindet sich von einem zufälligen freien CMD-Port 
+        (N&lt;1024) aus mit dem CMD-Port 21 des Servers und gibt seinen Datenport 
+        bekannt, indem er <span class="text_fett_kursiv">port N+1 </span><span class="text">sendet</span>.</li>
+      <li>Der Server sendet ein ACK an den CMD-Port N des Client.</li>
+      <li>Der Server verbindet seinen Datenport 20 mit dem vom Client vorgeschlagenen 
+        Port N+1.</li>
+      <li>Der Client sendet ein ACK von seinem Datenport N+1 auf den Datenport 
+        20 des Servers.</li>
+    </ul>
+  </li>
+  <li><span class="text_fett">Passive Mode</span><span class="text">:</span> 
+    <ul>
+      <li class="text">Der Client verbindet sich von einem zufälligen freien 
+        CMD-Port (N&lt;1024) aus mit dem CMD-Port 21 des Servers und vereinbart 
+        passives FTP durch Senden von <span class="text_fett_kursiv">PASV</span>.</li>
+      <li class="text">Der Server gibt <span class="text_fett_kursiv">port 2024</span> 
+        als Datenport bekannt. Sein (traditioneller) Datenport 20 wird in diesem 
+        Modus nicht verwendet.</li>
+      <li class="text">Der Client initialisiert die Datenverbindung indem er seinen 
+        Datenport N+1 mit dem Daten-Port 2024 des Servers verbindet.</li>
+      <li class="text">Der Server schickt ein ACK an den Datenport N+1 des Client.</li>
+    </ul>
+  </li>
+</ul>
+<p class="text">Die Tatsache, dass beim <span class="text_kursiv">Active Mode</span> 
+  der Server sich mit einem zufällig gewählten hohen Port am Client 
+  verbindet, wiederspricht zunehmend dem Sicherheitsbedürfnis der Administratoren 
+  von Clients und wird daher vielfach durch Firewalls verhindert. Da die Bereitstellung 
+  von Dateien zumeist im Interesse der Serveradministratoren liegt, wir neuerdings 
+  sehr oft <span class="text_kursiv">Passiv Mode</span> vereinbart, bei dem die 
+  Verbindungen durch den Client initialisiert werden, was natürlich durch 
+  die Firewall des Servers gestattet werden muss.</p>
+<p class="text"> FTP besitzt eine eigene interaktive Konsolenanwendung, die mit 
+  <span class="text_kursiv">ftp</span> gestartet und einer Hilfefunktion <span class="text_kursiv">help</span> 
+  ausgestattet ist.<br>
+  Die Konsole hat allerdings den Nachteil, dass bei komplexeren Dateistrukturen 
+  die Übersichtlichkeit rasch leidet, weshalb zahlreiche FTP-Clients, die 
+  über eine grafische Oberfläche verfügen, angeboten werden. Das 
+  folgende Listing zeigt den Ablauf einer einfachen benutzerspezifischen FTP-Sitzung, 
+  wie sie sich an der Eingabeaufforderung einer WIN2K-WKST präsentiert. Nach 
+  dem Benutzerlogin wird ein Verzeichnislisting ausgegeben und die Hilfefunktion 
+  aufgerufen, wobei Benutzereingaben fett gedruckt sind:</p>
+<p class="quellcode"><span class="quellcode">C:\&gt;<b>ftp graf.tgm.ac</b><br>
+  Verbindung mit graf.tgm.ac wurde hergestellt.<br>
+  220 PHOENIX Microsoft FTP Service (Version 5.0).<br>
+  Benutzer (graf.tgm.ac:(none)): <b>Ernst.Graf</b><br>
+  331 Password required for Ernst.Graf.<br>
+  Kennwort:<br>
+  230-Willkommen auf phoenix.ccc.at !<br>
+  230 User Ernst.Graf logged in.<br>
+  ftp&gt; <b>dir</b><br>
+  200 PORT command successful.<br>
+  150 Opening ASCII mode data connection for /bin/ls.<br>
+  drwxrwxrwx 1 owner group 0 Jun 13 14:08 _private<br>
+  -rwxrwxrwx 1 owner group 2442 Jun 20 14:00 default.htm<br>
+  drwxrwxrwx 1 owner group 0 Jun 13 17:28 images<br>
+  -rwxrwxrwx 1 owner group 629 Jun 15 13:03 pcc.css<br>
+  226 Transfer complete.<br>
+  FTP: 276 Bytes empfangen in 0,12Sekunden 2,30KB/s<br>
+  ftp&gt; <b>help</b><br>
+  Befehle können abgekürzt werden. Befehle sind:<br>
+  ! delete literal prompt send<br>
+  ? debug ls put status<br>
+  append dir mdelete pwd trace<br>
+  ascii disconnect mdir quit type<br>
+  bell get mget quote user<br>
+  binary glob mkdir recv verbose<br>
+  bye hash mls remotehelp<br>
+  cd help mput rename<br>
+  close lcd open rmdir<br>
+  ftp&gt;<b> bye</b><br>
+  221 Thank you for using ccc.at !</span></p>
+<p class="quellcode"><span class="quellcode">C:\&gt;</span></p>
+<p class="text">Im Unterschied dazu das Listing einer FTP-Sitzung mit einem Server 
+  der TU-Wien, auf dem Freeware angeboten wird. Das Listing ist hier verkürzt 
+  wiedergegeben. Die Anmeldung erfolgt mit dem Benutzernamen <span class="text_kursiv">anonymous</span> 
+  und leerem Kennwort: </p>
+<p class="quellcode">C:\&gt;<b>ftp gd.tuwien.ac.at</b><br>
+  Verbindung mit gd.tuwien.ac.at wurde hergestellt.<br>
+  220-<br>
+  220-- G D S ------ Welcome to Goodie Domain Service<br>
+  220-- D -- Vienna University of Technology, Austria<br>
+  220-- S -- Dept. of Information Technology Services<br>
+  220-- ****** Your Source of Open Source ******* -<br>
+  220-===============================================<br>
+  220-<br>
+  220- What's in store here ?<br>
+  220-### Goodies: Open Source Software, Freeware ###<br>
+  ........................................................................ <br>
+  220<br>
+  Benutzer (gd.tuwien.ac.at:(none)):<b> anonymous</b><br>
+  331 Please specify the password.<br>
+  Kennwort:<br>
+  230 Login successful.<br>
+  ftp&gt; <b>ls -la</b><br>
+  200 PORT command successful. Consider using PASV.<br>
+  150 Here comes the directory listing.<br>
+  drwxr-xr-x 34 ftp ftp 2048 Jun 19 09:22 .<br>
+  drwxr-xr-x 34 ftp ftp 2048 Jun 19 09:22 ..<br>
+  drwxrwxr-x 9 ftp ftp 512 Feb 28 09:37 .admin<br>
+  lrwxrwxrwx 1 ftp ftp 13 Feb 26 2002 .g -&gt; .i/dquote.php<br>
+  -rw-rw-r-- 1 ftp ftp 1039 Aug 18 2002 .gds.php<br>
+  -rw-rw-r-- 1 ftp ftp 1114 Dec 19 2002 welcome.txt<br>
+  -rw-rw-r-- 1 ftp ftp 1113 Dec 19 2002 willkommen.txt<br>
+  drwxr-xr-x 7 ftp ftp 512 Nov 04 2002 z1<br>
+  drwxr-xr-x 7 ftp ftp 512 Apr 28 17:11 z10<br>
+  drwxr-xr-x 16 ftp ftp 512 May 26 11:12 z12<br>
+  drwxr-xr-x 5 ftp ftp 512 Jun 04 17:56 z13<br>
+  drwxr-xr-x 4 ftp ftp 512 Jan 24 13:42 z14<br>
+  drwxrwxr-x 4 ftp ftp 512 Jan 27 10:34 z15<br>
+  drwxr-xr-x 5 ftp ftp 512 Jan 09 10:35 z16<br>
+  drwxr-xr-x 10 ftp ftp 512 May 26 10:28 z17<br>
+  drwxr-xr-x 4 ftp ftp 512 Oct 15 2002 z18<br>
+  drwxr-xr-x 10 ftp ftp 512 Mar 27 18:06 z2<br>
+  drwxr-xr-x 7 ftp ftp 512 May 21 09:42 z3<br>
+  drwxr-xr-x 6 ftp ftp 512 Jun 04 12:32 z4<br>
+  drwxrwxr-x 2 ftp ftp 512 Sep 02 2002 z5<br>
+  drwxr-xr-x 7 ftp ftp 512 Apr 30 08:30 z6<br>
+  drwxr-xr-x 4 ftp ftp 512 Jan 21 12:44 z7<br>
+  drwxr-xr-x 4 ftp ftp 512 Apr 15 13:37 z9<br>
+  226 Directory send OK.<br>
+  FTP: 7270 Bytes empfangen in 5,15Sekunden 1,41KB/s<br>
+  ftp&gt;<b> bye</b><br>
+  221 Goodbye.</p>
+<p class="quellcode">C:\&gt;</p>
+<p class="text">Etwas anwenderfreundlichere FTP-Sitzungen können mit den 
+  meisten Internetbrowsern (<span class="text_kursiv">ftp://</span>) aufgebaut 
+  werden. </p>
+<p class="text"> Bei Verwendung des FTP-Protokolls ist zu bedenken, dass berechtigten 
+  Benutzern unter Umständen tiefgreifende Rechte auf der Verzeichnisstruktur 
+  des eigenen Hosts eingeräumt werden, und dass daher das FTP-Protokoll ein 
+  gewisses Sicherheitsrisiko darstellt zumal die Übertragung der Daten - 
+  auch der Passwörter - unverschlüsselt stattfindet. </p>
+<p class="ueberschrift_3">SSH</p>
+<p class="text">Das SSH-Protokoll (secure shell) schafft hier eine gewisse Abhilfe. 
+  SSH sichert sowohl die Authentifizierung als auch die Kommunikation durch kryptografische 
+  Verfahren wie etwa dem Public-Key-Verfahren. Dabei wird der öffentliche 
+  Schlüssel auf dem Zielsystem hinterlegt und der private Schlüssel 
+  zur Benutzerauthentifizierung benutzt. SSH wird über eigene SSH-Clients 
+  bedient und kann Kanäle zur Terminal-Emulation ersetzen, mit denen auf 
+  einem Computer das Verhalten eines anderen Computers emuliert werden kann. Es 
+  wird häufig in der Remoteverwaltung von hinsichtlich der Sicherheit sensiblen 
+  Webhosts oder zur Dateiübertragung auf Webserver eingesetzt. SSH verwendet 
+  den <span class="text_fett">TCP/UDP-Port 22</span>.</p>
+<p class="ueberschrift_3">HTTP</p>
+<p class="text">Das HTTP (Hypertext Transfer Protokoll) ist ein Protokoll der 
+  Applikationsschicht, das dem Internetdienst <span class="text_fett">WWW</span> 
+  (World Wide Web) entspricht. Es ist plattformunabhängig und in der Lage, 
+  mit Servern unter Einbeziehung anderer Protokolle der Applikationsschicht zu 
+  kommunizieren. Das Protokoll setzt heute üblicherweise auf TCP/IP auf.</p>
+<p class="text">Hinsichtlich seiner Funktionsweise operiert es nach dem Frage-Antwort-Prinzip 
+  (Request-Response). Eine HTTP-Sitzung wird zwischen einem HTTP-Client, das ist 
+  ein Webbrowser, und einem HTTP-Server, das ist ein Webserver, aufgebaut und 
+  verläuft folgendermaßen:</p>
+<table width="530" border="0" align="center" cellspacing="10">
+  <tbody><tr bgcolor="#006699"> 
+    <td class="text_fett_zent" width="188"><font color="#CCCCCC">Protokoll</font></td>
+    <td class="text_fett_zent" width="370"><font color="#CCCCCC">Beispiel</font></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td class="text" width="188"><font color="#006699">HTTP-Client baut Verbindung 
+      auf zum HTTP-Server auf</font></td>
+    <td class="quellcode" width="370">Connected to www.tgm.ac.at.</td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td class="text" width="188"><font color="#006699">HTTP-Client schickt einen 
+      Request</font></td>
+    <td class="quellcode" width="370">GET /index.html HTTP/1.0</td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td class="text" height="288" width="188"><font color="#006699">HTTP-Server 
+      schickt einen Response, der die angeforderte Nachricht enthält.</font></td>
+    <td class="quellcode" height="288" width="370">HTTP/1.1 200 OK<br>
+      Date: Mon, 18 Sep 2003 13:59:58 GMT<br>
+      Server: Apache/1.3.6 (Unix) (SuSE/Linux)<br>
+      Last-Modified: Tue, 29 Aug 2000 08:08:58 GMT<br>
+      ETag: "134015-8e8-39ab6f9a"<br>
+      Accept-Ranges: bytes<br>
+      Content-Length: 2280<br>
+      Connection: close<br>
+      Content-Type: text/html 
+      <p>&lt;HTML&gt;<br>
+        &lt;HEAD&gt;<br>
+        &lt;TITLE&gt;Die Schule der Technik&lt;/TITLE&gt;<br>
+        &lt;/HEAD&gt;<br>
+        &lt;body bgcolor="#000000" text="#FFFFCC" link="#FFCC00" 
+        <br>
+        alink="#FF0000" vlink="#FF9900"&gt;<br>
+        ...<br>
+        &lt;/BODY&gt;<br>
+        &lt;/HTML&gt;</p></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td class="text" width="188"><font color="#006699">HTTP-Server beendet die 
+      Verbindung</font></td>
+    <td class="quellcode" width="370">Connection closed by foreign host.</td>
+  </tr>
+</tbody></table>
+<p class="text">Das Beispiel illustriert den Ablauf einer Sitzung, ist aber ansonsten 
+  nur von theoretischem Interesse. Die Nachricht selbst ist im HTML-Format (hypertext 
+  markup language) codiert, der am Internet üblichen Beschreibungssprache 
+  für Dokumente, die dann vom Webbrowser interpretiert und zur Anzeige gebracht 
+  werden. Überdies erkennt man, dass die Adressierung des HTTP-Servers hier 
+  mit DNS bewerkstelligt wird, wobei auch IP-Adressen zulässig wären.</p>
+<p class="ueberschrift_3">VoIP (Voice over IP):</p>
+<p class="text">VoIP ist ein Protokoll, das Sprache in Form von Telefongesprächen 
+  (<span class="text_kursiv">IP-Telefonie</span>) unter Verwendung des IP Protokolls 
+  in Computernetzen überträgt. Dabei werden die Informationen nicht 
+  über eine geschaltete Verbindung leitungsvermittelt übertragen, sondern 
+  in IP-Pakete aufgeteilt, die ihr Ziel allenfalls auf verschiedenen Wegen und 
+  in unterschiedlicher Zeit erreichen. Die logistisch aufwendige Technologie ist 
+  jung, derzeit wird daran gearbeitet, Zuverlässigkeit und Qualität 
+  der klassischen Telefonie zu erreichen. Die Vorteile wären, dass die Entfernung 
+  der beiden Gesprächsteilnehmer hinsichtlich der Verrechnung unwesentlich 
+  ist, weil das IP-Protokoll verbindunglos arbeitet und dass (bei einer ausreichenden 
+  Anzahl von statischen IP-Adressen) alle VoIP-Clients weltweit unter der selben 
+  Rufnummer erreichbar wären. Telefonkosten könnten damit weiter sinken.</p>
+<p class="text">Hinsichtlich der Funktionalität wird ein vom Aufnahmemikrofon 
+  erzeugtes analoges Signal mit einem <span class="text_fett">ADC</span> (<span class="text_kursiv">Analog-Digital-Converter</span>) 
+  in ein digitales Signal verwandelt, das binär codiert (<span class="text_fett">Codec</span>) 
+  und komprimiert wird, wobei - so wie etwa bei MP3 - für das Gehör 
+  unwesentliche Informationen ausgefiltert werden. Dieses Signal wird nun in IP-Pakete 
+  aufgeteilt. Weil nach gängigem Status Router alle IP-Pakete gleichwertig 
+  behandeln, werden VoIP-Pakete, obwohl sie eine entsprechende Kennung haben, 
+  nicht bevorzugt geroutet und damit die notwendige <span class="text_fett">QoS</span> 
+  (Quality of Service) nicht erreicht, die eine unterbrechungsfreie Übertragung 
+  der Sprachinformation gewährleisten würde. Die Schnittstelle zwischen 
+  dem klassischen Telefonsystem und dem IP-Telefonsystem bilden Gatwayrechner, 
+  die ankommende IP-Pakete unter Verwendung des richtigen Codecs auspacken, ordnen 
+  und an das Empfängertelefon übertragen. Für einen korrekten Verbindungsaufbau 
+  müssen diese Gatewayrechner weltweit erreichbar sein, also statische IP-Adressen 
+  haben und die Telefonnummern der angeschlossenen Teilnehmer kennen. Sie sind 
+  daher zumeist im Eigentum kommerzieller Anbieter, die Teilnetze betreiben (ICQ) 
+  und Gespräche mit Teilnehmern in anderen Netzen nicht anbieten können, 
+  weil eine weltweit akzeptierete Norm zur Koppelung von Telefonnummern zu IP-Adressen 
+  fehlt. Abhilfe kann hier das von den Europäern favorisierte <span class="text_fett">ENUM 
+  Protokoll</span> (RFC 3761, E.164-Standard der <span class="text_kursiv">International 
+  Telecommunication Union</span> (<span class="text_kursiv">ITU</span>)) schaffen, 
+  das die Telefonnummer in eine spezielle IP Adresse umwandelt, indem es die Nummer 
+  stürzt und eine Kennung für die Subdomain anhängt:<br>
+  Die Rufnummer</p>
+<p class="text_kursiv_zent">+43 1 2345 6789</p>
+<p class="text">wird etwa zu</p>
+<p class="text_kursiv_zent">9.8.7.6.5.4.3.2.1.4.3.e164.arpa </p>
+<p class="text">Damit ist ein Format erreicht, das von DNS weitergegeben werden 
+  kann.</p>
+<p class="text">Derzeit ist VoIP noch wenig verbreitet, weil es hinsichtlich der 
+  Endgeräte keine fixen Standards und nur wenige weltweit agierende Provider 
+  gibt. Für Telefongespräche innerhalb größerer Firmen mag 
+  es aber interessant sein, zumal es für diesen Bereich interessante GPL 
+  gibt.</p>
+<!-- #EndEditable --> 
+<hr>
+
+<!-- #BeginEditable "Link" -->
+
+<table width="201" border="0" height="51" align="center">
+
+  <tbody><tr> 
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_tcp.html"><img src="./protokolle_files/buli_lo.jpg" width="30" height="20" alt="zurück" name="Image1" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image1&#39;,&#39;&#39;,&#39;button/buli_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/index.html"><img src="./protokolle_files/buob_lo.jpg" width="20" height="30" name="oben" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;oben&#39;,&#39;&#39;,&#39;button/buob_hi.jpg&#39;,1)" alt="Inhalt" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_dns.html"><img src="./protokolle_files/bure_lo.jpg" width="30" height="20" alt="vor" name="Image2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image2&#39;,&#39;&#39;,&#39;button/bure_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<!-- #EndEditable --> 
+
+<p class="text">&nbsp;</p>
+
+
+
+<!-- #EndTemplate -->
+
+
+
+</body></html>

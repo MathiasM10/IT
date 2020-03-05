@@ -1,0 +1,655 @@
+
+<!-- saved from url=(0038)http://graf.tgm.ac.at/BUN/nw_IPv6.html -->
+<html><!-- #BeginTemplate "/Templates/skriptum.dwt" --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<!-- #BeginEditable "doctitle" --> 
+
+<title>BSNW Netze</title>
+<style type="text/css">
+<!--
+.Stil1 {color: #999999}
+-->
+</style>
+<!-- #EndEditable --> 
+
+
+
+<link rel="stylesheet" href="./ipv6_files/bsnw.css" type="text/css">
+
+<script language="JavaScript">
+
+<!--
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.0
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script>
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onload="MM_preloadImages(&#39;button/buob_hi.jpg&#39;,&#39;button/buli_hi.jpg&#39;,&#39;button/bure_hi.jpg&#39;)">
+
+<!-- #BeginEditable "Text" --> 
+
+<p class="ueberschrift_2">2.3.6 IPv6 (IPnG)</p>
+
+<p class="text">Schon seit geraumer Zeit ist klar, dass das in <a href="http://graf.tgm.ac.at/BUN/nw_ip.html">2.3.1</a> 
+
+  beschriebene IP-Protokoll aufgrund des raschen Wachstums des Internet schon 
+
+  bald unzureichend werden würde. Das liegt einerseits an einer weltweiten 
+
+  Verknappung der IP-Adressen und anderseits an den, aufgrund der restriktiven 
+
+  Adressvergabe, immer umfangreicher werdenden Routingtabellen. Ab dem Jahr 1993 
+
+  wurde unter dem Titel <b>IPnG</b> (<i>Internet Protokoll next Generation</i>) 
+
+  ein neues Protokoll entwickelt, das die Bezeichnung <b>IPv6</b> erhielt und 
+
+  in den RFC 1883 [Internet Protocol, Version 6 (IPv6) Specification, Dec. 1995] 
+
+  bzw. RFC 2460 [Internet Protocol, Version 6 (IPv6) Specification, Dec. 1998] 
+
+  spezifiziert ist.</p>
+
+<p class="text">Wir beschreiben im Folgenden die wesentlichen Merkmale von IPv6:</p>
+
+<p class="ueberschrift_3">Adressen:</p>
+
+<p class="text">Die Länge der Adresse beträgt 128 Bit statt 32 Bit
+  bei 
+
+  IPv4. Es gibt also künftig 2<sup>128</sup>=3.4 10<sup>38</sup> IP-Adressen,
+  was in Worten der Zahl 340 Sextillionen entspricht. 
+
+  Die Darstellung der 128 Bit langen Binärzahl erfolgt in 8 Blöcken
+  
+
+  zu je 16 Bit, die hexadezimal angegeben
+  
+
+  werden. Zur besseren Lesbarkeit wird als Trennzeichen ein Doppelpunkt nach
+  je 16 Bit gesetzt. </p>
+
+<p class="text_fett_zent_kurs">3FA5:0200:0350:0000:0000:0000:0000:0001</p>
+
+<p class="text">Weiters dürfen Gruppen von Nullen einmal
+  
+
+  weggelassen werden. Ebenso werden führende Nullen nicht angeschrieben.
+  Damit wird unser Beispiel zu:</p>
+
+<p class="text_fett_zent_kurs">3FA5:200:350::1</p>
+
+<p class="text">Darüber hinaus sollen die bisherigen IPv4-Adressen weiter 
+
+  verwendet werden können. Für <i>embedded </i>IPv4-Adressen, die sich 
+
+  wie IPv6-Adressen verhalten, ist die gemischte Darstellung </p>
+
+<p class="text_fett_zent_kurs">::0000:193.170.8.138</p>
+
+<p class="text">erlaubt, jedoch mittlerweile als veraltet gekennzeichnet. Kennzeichen
+  sind die führenden
+  Nullen. In der IPv6-Schreibweise 
+
+  entspricht dem</p>
+
+<p class="text_fett_zent_kurs">::0000:C1AA:88A</p>
+
+<p class="text">was man einfach aus</p>
+
+<p class="text_fett_zent_kurs">HEX(193*2<sup>8</sup>+170) <span class="text_zent">und</span> 
+
+  HEX(8*2<sup>8</sup>+138)</p>
+
+<p class="text">errechnet. Für routbare IPv4-Adressen, die aber ansonsten
+  
+
+  die Eigenschaften von IPv6 nicht unterstützen ist die gemischte Schreibweise </p>
+
+<p class="text_fett_zent_kurs">::FFFF:193.170.8.138</p>
+
+<p class="text">festgelegt, Kennzeihen ist das Präfix <span class="text_fett">::FFFF. 
+
+  </span>Schließlich bedeutet bei IPv4-Subneting die Darstellung</p>
+
+<p class="text_fett_zent_kurs">::0000:C1AA:88A/96</p>
+
+<p class="text">wie gewohnt, dass die führenden 96 Bit auf die Netzwerkadresse
+  und 128-96=32 
+
+  Bit auf die Hostadresse entfallen.</p>
+
+<p class="ueberschrift_3">Datagrammheader</p>
+
+<p class="text">Das Headerkonzept wurde bei IPv6 völlig neu gestaltet. Jedes 
+
+  Datagramm enthält einen <span class="text_fett">IPv6-Basisheader</span> 
+
+  und optional <span class="text_fett">IPv6-Erweiterungsheader</span> für 
+
+  speziellere Informationen.</p>
+
+<table width="600" border="0" align="center">
+
+  <tbody><tr> 
+
+    <td class="text_fett_zent" width="81">&nbsp;</td>
+
+    <td class="text_fett_zent" colspan="3" bgcolor="#CCCCCC"><font color="#3300CC">optional</font></td>
+
+    <td class="text_fett_zent" width="108">&nbsp;</td>
+
+    <td class="text_fett_zent" width="81">&nbsp;</td>
+
+    <td class="text_fett_zent" width="84">&nbsp;</td>
+  </tr>
+
+  <tr> 
+
+    <td class="text_fett_zent" width="81" bgcolor="#330099"><font color="#FFFFFF">Base 
+
+      Header</font></td>
+
+    <td class="text_fett_zent" width="81" bgcolor="#3300CC"><font color="#CCCCCC">Extension 
+
+      Header</font></td>
+
+    <td class="text_fett_zent" width="34" bgcolor="#3300CC"><font color="#CCCCCC">...</font></td>
+
+    <td class="text_fett_zent" width="101" bgcolor="#3300CC"><font color="#CCCCCC">Extension 
+
+      Header</font></td>
+
+    <td class="text_fett_zent" colspan="3" bgcolor="#0099FF">Daten</td>
+  </tr>
+</tbody></table>
+
+<p class="text">Der Base-Header von IPv6 ist doppelt so lang wie der IPv4-Header,
+  
+
+  was an der Länge von <span class="text_kursiv">Source</span>- und <span class="text_kursiv">Destinationadress</span> 
+
+  liegt, hat aber dafür nur mehr 8 Felder (statt 12). Im Base Header befinden
+  
+
+  sich außer einem Feld<span class="text_kursiv"> Version</span> ein <span class="text_kursiv">Class</span>-Feld,
+  
+
+  in dem dem Datagramm eine bestimmte Priorität zugeordnet werden kann oder
+  
+
+  ein <span class="text_kursiv">Flow Label-Feld</span>, in dem Router veranlasst
+  
+
+  werden können, das Paket in besonderer Weise (z.B.: <span class="text_kursiv">real
+  
+
+  time</span>) zu behandeln. <span class="text_kursiv">Payload Length</span> gibt
+  
+
+  die Nutzdatenlänge des Datagramms an,<font color="#FFFFFF"> </font><span class="text_kursiv">Next
+  
+
+  Header</span> bestimmt den Typ des ersten Erweiterungsheaders und <span class="text_kursiv">Hop
+  
+
+  Limit</span> entspricht dem TTL-Feld, das von jedem Router dekrementiert und
+  
+
+  beim Wert 0 verworfen wird.</p>
+
+<table width="500" border="0" align="center">
+
+  <tbody><tr bgcolor="#CCCCCC"> 
+
+    <td class="text_kursiv_zent" width="65">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="58">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="60">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="59">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="57">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="65">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="50">4 Bit</td>
+
+    <td class="text_kursiv_zent" width="52">4 Bit</td>
+  </tr>
+
+  <tr bgcolor="#0099FF"> 
+
+    <td class="text_fett_zent" width="65"><font color="#FFFFFF">Version</font></td>
+
+    <td class="text_fett_zent" colspan="2"><font color="#FFFFFF">Class</font></td>
+
+    <td class="text_fett_zent" colspan="5"><font color="#FFFFFF">Flow Label</font></td>
+  </tr>
+
+  <tr bgcolor="#0099FF"> 
+
+    <td class="text_fett_zent" colspan="4"><font color="#FFFFFF">Payload Length</font></td>
+
+    <td class="text_fett_zent" colspan="2"><font color="#FFFFFF">Next Header</font></td>
+
+    <td class="text_fett_zent" colspan="2"><font color="#FFFFFF">Hop Limit</font></td>
+  </tr>
+
+  <tr bgcolor="#0099FF"> 
+
+    <td class="text_fett_zent" colspan="8" height="63"><font color="#FFFFFF">Source 
+
+      Adress</font></td>
+  </tr>
+
+  <tr bgcolor="#0099FF"> 
+
+    <td class="text_fett_zent" colspan="8" height="70"><font color="#FFFFFF">Destination 
+
+      Adress</font></td>
+  </tr>
+</tbody></table>
+
+<p class="text">Die fehlenden Felder fehlen entweder gänzlich, wie etwa <span class="text_kursiv">Checksum</span>, 
+
+  oder die entsprechenden Informationen werden in einen der optionalen Erweiterungsheader 
+
+  gepackt. Es fehlen auch alle Informationen zur Datagrammfragmentierung, weil 
+
+  diese unter IPv6 quasi abgeschafft ist. IPv6 erwartet vom sendenden Host, dass 
+
+  die Pakete eine Größe von <span class="text_kursiv">1280 Byte</span> 
+
+  nicht übersteigen, und die werden von IPv6-Routern ohne zu fragmentieren 
+
+  weitergeleitet. Damit sollen die Router wesentlich entlastet werden.</p>
+
+<p class="text">Zur Aufnahme weiterer Informationen dienen Erweiterungsheader:</p>
+
+<p class="text_zent">
+<table border="1" width="90%" align="center">
+
+  <tbody> 
+
+  <tr bgcolor="#330066"> 
+
+    <th class="text_fett_zent" width="50%"><font color="#FFFFFF">Header </font>
+    </th><th class="text_fett_zent" width="50%"><font color="#FFFFFF">Beschreibung</font>  </th></tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett"><font color="#330066">IPv6-Basis-Header</font></td>
+
+    <td width="50%" class="text_fett"><font color="#330066">Erforderlich</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="5"><font color="#330066"> Hop-by-Hop 
+
+      Options Header</font></td>
+
+    <td width="50%" class="text_fett" height="5"><font color="#330066">Optionen 
+
+      für für Router auf den Teilstrecken</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="10"><font color="#330066">Destination 
+
+      Options Header</font></td>
+
+    <td width="50%" class="text_fett" height="10"><font color="#330066">Informationen 
+
+      für das Ziel</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="15"><font color="#330066">Routing 
+
+      Header</font></td>
+
+    <td width="50%" class="text_fett" height="15"><font color="#330066">Definition 
+
+      einer vollständigen oder teilweisen Route</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="8"><font color="#330066">Fragment 
+
+      Header</font></td>
+
+    <td width="50%" class="text_fett" height="8"><font color="#330066">Verwaltung 
+
+      von Datengrammfragmenten</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="8"><font color="#330066">Authentication
+        
+
+      Header</font></td>
+
+    <td width="50%" class="text_fett" height="8"><font color="#330066">Echtheitsüberprüfung 
+
+      des Senders</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="7"><font color="#330066">Encapsulating 
+
+      Security Payload Header</font></td>
+
+    <td width="50%" class="text_fett" height="7"><font color="#330066">Informationen 
+
+      über den verschlüsselten Inhalt</font></td>
+  </tr>
+
+  <tr bgcolor="#CCCCCC"> 
+
+    <td width="50%" class="text_fett" height="10"><font color="#330066">Upper 
+
+      Layer Header</font></td>
+
+    <td width="50%" class="text_fett" height="10"><font color="#330066">Header 
+
+      der höheren Protokollschichten (TCP, UDP, ...)</font></td>
+  </tr>
+  </tbody> 
+</table>
+
+</p><p class="ueberschrift_3">Eigenschaften von IPv6</p>
+<ul>
+  <li class="text">Aus heutiger  Sicht ist davon auszugehen, dass der vom IPv6-Protokoll
+    zur Verfügung gestellte Adressraum für lange Zeit ausreichen wird, zumal
+    auf jeden Quadratmillimeter der Erdoberfläche inklusive Ozeanen ca. 600
+    Billiarden IP-Adressen entfallen. Damit sollte es möglich sein, künftig IP-Adressen
+    nicht mehr dynamisch (DHCP) sondern statisch zu vergeben.</li>
+  <li class="text"> Die Trennzeichen kollidieren mit der Portangabe im HTTP-Protokoll.
+   Daher müssen in URLs IPv6-Adressen in eckige Klammern gesetzt werden.</li>
+</ul>
+<p class="text_fett_zent_kurs">http://[3FA5:0200:350:0:0:0:0:1]:80</p>
+<ul>
+  <li class="text">IPv6-Adressen verwenden als Stanard einen Netzanteil mit einer
+    Länge von 64 Bit, womit auch auf den Hostanteil 64 Bit entfallen. Netzklassen
+    wie bei IPv4 gibt es nicht. Damit entfallen auch Netzmasken.</li>
+  <li class="text">Wie schon bei IPv4 kann jedes Netzwerkinterface mehrere IP-Adressen
+    haben. Die Adressen werden aber bei IPv6 automatisch generiert: Für
+    die Verbindung im LAN (Peer to Peer, ohne Router) weist sich jedes Interface
+    eine <span class="text_fett_kursiv">Link-lokale</span> Adresse
+    selbst zu. Der Netzanteil dieser Adresse besteht aus dem <span class="text_fett_kursiv">Präfix</span> (engl.
+    <span class="text_fett_kursiv">prefix</span>)<span class="text_kursiv"> fe80</span> und
+    48 Nullen. Der Hostanteil wird aus der MAC-Adresse des Interfaces gemäß einer
+    Norm <span class="text_kursiv">EIU
+    64</span> der <span class="text_kursiv">IEEE</span> berechnet. Ein Beispiel
+    für eine Link-lokale Adresse, mit der nur im LAN kommuniziert werden
+    kann, wäre</li>
+</ul>
+<p class="text_fett_zent_kurs">fe80:0000:0000:0000:3456:bb45:78a0:affe <span class="text">oder
+  kürzer</span> fe80::3456:bb45:78a0:affe</p>
+<ul>
+  <li class="text">Um das doppelte Auftreten von Adressen im LAN zu verhindern,
+    muss der Host im LAN fragen, ob die Adresse schon vergeben ist. (<span class="text_kursiv">Neighbour
+    Solicitation</span> [Ansuchen]) Ist die Adresse im LAN schon vorhanden, so
+    wird dies durch <span class="text_kursiv">Neighbour Advertisement</span> [Anzeige]
+    mitgeteilt. In diesem Fall bleibt dann nur die Einstellung von Hand. Das
+    doppelte Auftreten von Adressen im LAN kann ein Hinweis auf ARP-Spoofing
+    sein.</li>
+  <li class="text">Öffentliche Adressen werden  ebenfalls automatisch im
+    Zusammenwirken mit Routern generiert. Auf die Anfrage eines Hosts sendet
+    der Router das Präfix der Netzwerkadresse, das ggf. mit Nullen auf 64 Bit
+    aufgefüllt wird. Der Host kann daraus selbstständig durch Anfügen seiner
+    <span class="text_kursiv">EUI 64</span>-Hostadresse als Suffix (64 Bit) die
+    IPv6 Adresse generieren. Dem Router selbst ist nur sein Präfix bekannt, nicht
+    aber die Adressen der zugehörigen Hosts.</li>
+  <li class="text">Das Verfahren stellt sicher, dass jeder Host nur genau eine
+    Link-lokale Adresse und genau eine öffentliche Adresse eingestellt haben
+    kann. Es handelt sich dabei um <span class="text_fett_kursiv">autoconfiguration</span>,
+    ein Eingreifen durch den Administrator ist nicht notwendig.</li>
+  <li class="text">Der Router überträgt mit dem Präfix auch weitere Protokollparameter
+    wie <span class="text_kursiv">Hop Count</span> (früher TTL) oder <span class="text_kursiv">MTU</span> (<span class="text_kursiv">Maximum
+    Transmission Unit), </span>die maximale
+    Paketgröße.</li>
+  <li class="text">Im Falle eines Providerwechsels muss damit dem neuen Router
+    lediglich das Netzpräfix mitgeteilt werden. Dieses <span class="text_fett_kursiv">Renumbering</span> ist
+    allerdings von Hand durchzuführen und kann dazu führen, dass Netze für eine
+    gwisse Zeit <span class="text_kursiv">multihomed</span>, also über zwei
+    Provider gleichzeitig erreichbar sind.</li>
+  <li class="text">Ein Nachteil der automatischen Konfiguration liegt offensichtlich
+    in der Tatsache, dass IPv6-Adressen weitgehend statisch sind, was es Dritten
+    erleichtert, Nutzerprofile aufzuzeichnen. Daher wird manchmal die <span class="text_kursiv">EUI-64</span>    Adresse
+    mit einer Pseudozufallszahl, die gelegentlich geändert wird, verknüpft und
+    als Hostadresse zugewiesen.</li>
+  <li class="text">Das Fragmentieren von Paketen und die Checksummenprüfung wurde
+    bei IPv6 ersatzlos gestrichen, was die Router wesentlich entlastet. Eine
+    Prüfsumme führt nur mehr der TCP-Header. Zu große Pakete werden von Routern
+    grundsätzlich verworfen, der Absender erhält eine ICMP-Fehlermeldung und
+    startet eine <span class="text_kursiv">Path-MTU-Discovery</span>.</li>
+  <li class="text">Eine auf
+    einem mobilen Gerät wie einem Notebook eigestellte
+    IPv6-Adresse bleibt auch in einem entfernten Netz erhalten.(<span class="text_fett_kursiv">Mobile
+    IPv6</span>)
+    Dazu sendet das Interface des mobilen Gerätes eine spezielle ICMP-Nachricht,
+    den <span class="text_fett_kursiv">Home
+    Agent</span>,
+    der es im  heimischen Netz vertritt und mitteilt, wo es erreichbar
+    ist. Die Kommunikation wird dabei getunnelt, das heißt, die IPv6 werden verschlüsselt,
+    gekapselt und mit einem neuen Header übertragen. Das Verfahren löst
+    allerdings bei Sicherheitsexperten Sorge aus, weil man fürchtet, Hacker
+    könnten
+    damit Hosts leichter umleiten.</li>
+</ul>
+<p class="ueberschrift_3">Adresstypen</p>
+<p class="text">Der Adressraum des IPv6 Protokolls wird nicht wie bei IPv4 in
+  Netzklassen geteilt. Die Aufteilung des Adressraums erfolgt aufgabenorientiert
+  durch Präfix, deren Länge in Bit nach einem Schrägstrich an die Adresse angehängt
+  wird. Wir geben einige spezielle Adressen oder Adressbereiche an:</p>
+<ul>
+  <li class="text_fett">Spezielle Adressen:</li>
+</ul>
+<table width="46%" border="0" align="center" cellpadding="5" cellspacing="5" class="text_fett_zent">
+  <tbody><tr>
+    <th width="30%" bgcolor="#003366" scope="col"><span class="Stil1">Adresse</span></th>
+    <th width="70%" bgcolor="#003366" scope="col"><span class="Stil1">Verwendung</span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#006666"><span class="Stil1"><em>::/128</em></span></td>
+    <td bgcolor="#006666"><span class="Stil1">undefinierte Adresse wie 0.0.0.0 </span></td>
+  </tr>
+  <tr>
+    <td bgcolor="#006666"><span class="Stil1"><em>::1/128</em></span></td>
+    <td bgcolor="#006666"><span class="Stil1">eigener Standort (localhost, loopback) </span></td>
+  </tr>
+  <tr>
+    <td bgcolor="#006666"><span class="Stil1"><em>0:0:0:0:0:FFFF::/96</em></span></td>
+    <td bgcolor="#006666"><span class="Stil1">in IPv6 abgebildete IPv4-Adressen,
+        die IPv4-Adresse steht in den letzten 32 Bit </span></td>
+  </tr>
+</tbody></table>
+<ul>
+  <li class="text_fett">Unicastadressen:</li>
+</ul>
+<blockquote>
+  <p class="text">Unicastadressen sind Adressen der Interfaces, wobei jedes Interface
+    mehrere Unicastadressen haben kann. Der grundsätzliche Aufbau ist:</p>
+  <table width="80%" border="2" align="center" cellpadding="5" summary="">
+<tbody><tr>
+<td width="10%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">3 bit</div></td>
+<td width="13%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">13 bit</div></td>
+<td width="11%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">8 bit</div></td>
+<td width="22%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">24 bit</div></td>
+<td width="27%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">16 bit</div></td>
+<td width="17%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">64 bit</div></td>
+</tr>
+<tr>
+<td bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">Prefix</div></td>
+<td bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">TopLevel-ID</div></td>
+<td bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">Reserved</div></td>
+<td bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">Next-Level-ID</div></td>
+<td bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">Site-Level-ID</div></td>
+<td width="17%" bgcolor="#999999" class="text_fett_zent_kurs"><div align="center">Interface-ID</div></td>
+</tr>
+<tr>
+  <td bgcolor="#999999" class="text_fett_zent_kurs">Protokoll</td>
+  <td bgcolor="#999999" class="text_fett_zent_kurs">ProviderID</td>
+  <td bgcolor="#999999" class="text_fett_zent_kurs">&nbsp;</td>
+  <td bgcolor="#999999" class="text_fett_zent_kurs">vom Provider vergeben </td>
+  <td bgcolor="#999999" class="text_fett_zent_kurs">vom Sitebetreiber vergeben </td>
+  <td bgcolor="#999999" class="text_fett_zent_kurs">&nbsp;</td>
+</tr>
+</tbody></table>
+<p></p>
+  <p class="text">Hinsichtlich der Präfixe gibt es:</p>
+  <table width="57%" border="0" align="center" cellpadding="5" cellspacing="5" class="text_fett_zent">
+    <tbody><tr>
+      <th width="20%" bgcolor="#003366" scope="col"><span class="Stil1">Präfix</span></th>
+      <th width="80%" bgcolor="#003366" scope="col"><span class="Stil1">Verwendung</span></th>
+    </tr>
+    <tr>
+      <td bgcolor="#006666"><span class="Stil1 Stil1"><em>2001</em></span></td>
+      <td bgcolor="#006666"><span class="Stil1">weltweit geroutet, Bitfolge 001... </span></td>
+    </tr>
+    <tr>
+      <td bgcolor="#006666"><span class="Stil1"><em>FE80</em></span></td>
+      <td bgcolor="#006666"><span class="Stil1">Link-lokal, Nachbarschaftserkennung,
+      Peer to Peer </span></td>
+    </tr>
+    <tr>
+      <td bgcolor="#006666"><span class="Stil1"><em>FEC0</em></span></td>
+      <td bgcolor="#006666"><span class="Stil1">Site-lokal, zum Routen in Subnetzen,
+      erhalten eine SubnetzID </span></td>
+    </tr>
+  </tbody></table>
+</blockquote>
+<ul>
+  <li class="text_fett">Multicastadressen:</li>
+</ul>
+<blockquote>
+  <p class="text">Sie ersetzen die aus IPv4 bekannten Broadcasts, ihr Präfix
+    beginnt mit <span class="text_kursiv">FF</span>.
+    Sie gestatten ein breites Spektrum an Optionen, die in den folgenden Bits
+    eingestellt werden können. Vorab definiert sind zum Beispiel: </p>
+  <ul>
+    <li class="text">ff02::1 ip6-allnodes </li>
+    <li class="text">ff02::2 ip6-allrouters </li>
+    <li class="text">ff02::3 ip6-allhosts </li>
+    <li class="text">FF02:0:0:0:0:1:FF00::/104 solicited-nodes (für Knoten die
+      Angesucht haben</li>
+  </ul>
+  </blockquote>
+<ul>
+  <li class="text_fett">Anycastadressen:</li>
+</ul>
+<blockquote>
+  <p class="text">Der  Adressbereich von Anycastadressen liegt in dem der Unicastadressen.
+    Anycastadressen sind von Unicastadressen daher auch formal nicht zu unterscheiden.
+    Anycastadressen adressieren eine Gruppe von Knoten, wobei grundsätzlich jener
+    Knoten konkret adressiert wird, zu dem die kürzeste Route führt. Das Verfahren
+    ist mit einem Callcenter vergleichbar, bei dem bekanntermaßen jener Apparat
+    die Verbindung herstellt, der am raschesten reagieren kann. Anycastadressen
+    werden derzeit nur Routern zugewiesen und sollen die Netzauslastung optimieren
+    helfen.</p>
+</blockquote>
+<p class="ueberschrift_3">DNS</p>
+<p class="text">Probleme bereitet derzeit die Umsetzung der IPv6 Adressen in
+  das DNS-System. Die automatische Suche nach Nameservern ist nämlich bei der
+  Autokonfiguration von IPv6 derzeit nicht implementiert. Abhilfe schafft hier
+  in der Praxis <span class="text_fett_kursiv">DHCPv6</span>, das eigentlich
+  mit IPv6 überflüssig sein sollte. Zudem ist auch die Darstellung der IPv6-Records
+  auf Nameservern nicht letztgültig standardisiert.</p>
+<!-- #EndEditable --> 
+
+<hr>
+
+<!-- #BeginEditable "Link" --> 
+
+<table width="201" border="0" height="51" align="center">
+
+  <tbody><tr> 
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_dns.html"><img src="./ipv6_files/buli_lo.jpg" width="30" height="20" alt="zurück" name="Image1" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image1&#39;,&#39;&#39;,&#39;button/buli_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/index.html"><img src="./ipv6_files/buob_lo.jpg" width="20" height="30" name="oben" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;oben&#39;,&#39;&#39;,&#39;button/buob_hi.jpg&#39;,1)" alt="Inhalt" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_verkehr.html"><img src="./ipv6_files/bure_lo.jpg" width="30" height="20" alt="vor" name="Image2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image2&#39;,&#39;&#39;,&#39;button/bure_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<!-- #EndEditable --> 
+
+<p class="text">&nbsp;</p>
+
+
+
+<!-- #EndTemplate -->
+
+
+
+</body></html>

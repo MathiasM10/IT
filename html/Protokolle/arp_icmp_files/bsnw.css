@@ -1,0 +1,25 @@
+.headline {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 30px; font-style: oblique; font-weight: bolder; text-align: center}
+
+.text {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: normal; text-align: left}
+
+.ueberschrift_2 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: italic; font-weight: bolder; text-align: left ; vertical-align: baseline; text-decoration: underline}
+
+.ueberschrift_1 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 24px; font-style: oblique; font-weight: bolder; text-align: left ; vertical-align: baseline }
+
+.ueberschrift_3 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: bold; text-decoration: underline}
+
+.text_zent { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: normal; text-align: center}
+
+.text_fett { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: bold; text-align: left }
+
+.text_kursiv { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: italic; font-weight: normal; text-align: left }
+
+.text_kursiv_zent { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: italic; font-weight: normal; text-align: center}
+
+.text_fett_zent { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: bold; text-align: center }
+
+.text_fett_zent_kurs { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: italic; font-weight: bold; text-align: center }
+
+.text_fett_kursiv { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: italic; font-weight: bold; text-align: left }
+
+.quellcode { font-family: "Courier New", Courier, mono; font-size: 12px; font-style: normal; font-weight: normal; text-align: left ; margin-left: 50px}

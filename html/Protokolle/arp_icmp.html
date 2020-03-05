@@ -1,0 +1,351 @@
+
+<!-- saved from url=(0037)http://graf.tgm.ac.at/BUN/nw_arp.html -->
+<html><!-- #BeginTemplate "../BSNW/Templates/skriptum.dwt" --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<!-- #BeginEditable "doctitle" --> 
+
+<title>BSNW Netze</title>
+<!-- #EndEditable -->
+
+
+
+<link rel="stylesheet" href="./arp_icmp_files/bsnw.css" type="text/css">
+
+<script language="JavaScript">
+
+<!--
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.0
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script>
+
+</head>
+
+
+
+<body bgcolor="#FFFFFF" text="#000000" onload="MM_preloadImages(&#39;button/buob_hi.jpg&#39;,&#39;button/buli_hi.jpg&#39;,&#39;button/bure_hi.jpg&#39;)">
+
+<!-- #BeginEditable "Text" --> 
+
+<p class="ueberschrift_2"> 2.3.2 ARP, ICMP</p>
+
+<p class="text">Wir beschreiben hier zwei Protokolle, die um das IP-Protokoll 
+
+  herum operieren. Während das ARP-Protokoll eine Verbindung zwischen den 
+
+  IP-Adressen und den eigentlichen Netzknoten herstellt, liefert das ICMP-Protokoll 
+
+  Informationen über den Zustand des Netzes. Beide Protokolle sind hinsichtlich 
+
+  der Administration wartungsfrei, ihre Erwähnung dient an dieser Stelle 
+
+  also lediglich dem Verständnis.</p>
+<p class="text">Ein <strong><em>IP-Paket</em></strong> wird auf seinem Weg vom Sender zum Empfänger auf allen Teilstrecken der Route in <strong><em>Frames</em></strong> 
+verpackt, wobei die Teilstrecken durch Sender, Empfänger und Router begrenzt 
+sind. Die Graphik zeigt den Aufbau eines Frames:</p>
+<p class="text_zent">
+<img alt="Frameheader" height="160" src="./arp_icmp_files/Frameformat.png" width="660"></p>
+<p class="text">Jeder Router setzt passende Sender- und Empfänger-MAC-Adressen 
+in den Frameheader (<span class="text_kursiv">MAC-Header</span>). Im Falle eines 
+Routers wird das in der Regel die eigene und die MAC-Adresse des nächsten 
+Routers sein, wobei letztere aus der IP-Adresse gefolgert werden kann. Ein 
+Problem kann es geben, wenn der Sender die MAC-Adresse des Empfängers nicht kennt und deshalb den Frame nicht bauen kann. Hier hilft das ARP-Protokoll. </p>
+<p class="ueberschrift_3">ARP</p>
+
+<p class="text">Es ist also ein Protokoll notwendig, 
+
+  das zur bekannten IP-Adresse eines Empfängers, dessen   MAC-Adresse liefert. Genau das wird 
+
+  vom ARP-Protokoll (address resolution protocol) besorgt. Das ARP operiert wie 
+
+  das IP-Protokoll auf dem OSI-Layer 3 und koppelt also IP-Adressen mit den entsprechenden 
+
+  MAC-Adressen, wobei diese Zuordnungen in einfachen Tabellen gespeichert werden.</p>
+
+<p class="text">Ist ein Paket zu adressieren, so sucht jeder Host zunächst 
+
+  in der eigenen ARP-Tabelle (<span class="text_kursiv">Address Resolution Cache</span>) 
+
+  nach der gesuchten MAC-Adresse. Im erfolglosen Fall wird ein <span class="text_fett">ARP-Request</span> 
+
+  in Form eines <em><strong>Broadcasts</strong></em> mit der Empfängeradresse <strong>FF:FF:FF:FF:FF:FF</strong> abgeschickt, der von jedem Host des (Sub)Netzes empfangen 
+
+  wird. Der entsprechende Host schickt dann ein <span class="text_fett">ARP-Reply</span>, 
+
+  das die eigene MAC-Adresse enthält, an den anfragenden Host zurück, 
+
+  der die Adresse in seiner Tabelle speichert. Liegt die MAC-Adresse des Empfängers nicht im Subnetz, wird der ARP-Request vom Gatewayrouter an den Empfänger geleitet, der ein ARP-Reply absetzt. </p>
+<p class="text">Die Funktionsweise zeigt auch folgendes 
+  
+  Flussdiagramm: </p>
+<p class="text_zent"><img src="./arp_icmp_files/arp.gif" width="399" height="292"></p>
+
+<p class="text">Auch die umgekehrte Vorgangsweise gibt es und zwar als <span class="text_fett">RARP</span> 
+
+  (Reverse ARP). Dabei wird ein RARP-Server verwendet, der alle Zuordnungen im 
+
+  Netz kennt. Die Wartung seiner Adresstabelle erfolgt über RARP-Requests, 
+
+  bei dem ein Host seine MAC-Adresse schickt und im ARP-Response seine IP-Adresse 
+
+  erfährt. Das Verfahren ist dann von Bedeutung, wenn Terminals (<span class="text_kursiv">diskless 
+
+  workstations</span>) ihre gesamte Software von einem Server downloaden.</p>
+
+<p class="ueberschrift_2"></p>
+
+<p class="ueberschrift_3">ICMP</p>
+
+<p class="text">Das ICMP-Protokoll (Internet Control Message Protocol) ermöglicht 
+
+  auf IP-Ebene das Anfordern und Versenden von Kontrollnachrichten, die die Hosts 
+
+  über den Zustand des Netzes oder einzelner Hosts unterrichten. Es ist im 
+
+  IP-Protokoll implementiert, wenn es auch genau genommen ein ULP (Upper Layer 
+
+  Protokoll) des IP-Protokolls ist. Anzusiedeln ist es wahrscheinlich irgendwo 
+
+  zwischen den OSI-Layern 3 und 4. Die Nachricht selbst ist im Datenteil des IP-Datagramms 
+
+  untergebracht.</p>
+
+<p class="text">Die Nachrichten selbst werden bestimmten Typen zugeordnet, ein 
+
+  Code-Feld liefert allenfalls Näheres. Die folgende Tabelle erläutert 
+
+  die verschiedenen Typen:</p>
+
+<table width="80%" border="1" align="center">
+
+  <tbody><tr bgcolor="#003366"> 
+
+    <td class="text_fett_zent_kurs" width="30"><font color="#CCCCCC">Type</font></td>
+
+    <td class="text_fett_zent_kurs" width="200"><font color="#CCCCCC">Bedeutung</font></td>
+
+    <td class="text_fett_zent_kurs" width="160"><font color="#CCCCCC">Erklärung</font></td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">0</td>
+
+    <td class="text" width="200">Echo reply </td>
+
+    <td class="text" width="160">Testdaten, unverändert retournieren (<span class="text_fett_kursiv">ping</span>).</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">3</td>
+
+    <td class="text" width="200">Destination unreachable </td>
+
+    <td class="text" width="160">Die genaue Ursache (Host, Port, Route, uam.) wird mitübertragen.</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">4</td>
+
+    <td class="text" width="200">Source quench </td>
+
+    <td class="text" width="160">Zeigt an, dass der Host mehr Datagramme erhalten 
+
+      hat, als er verarbeiten kann.</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">5</td>
+
+    <td class="text" width="200">Redirect (Change a Route) </td>
+
+    <td class="text" width="160">Teilt den Hosts die Adresse des Gateways mit, 
+
+      das eine bessere Route hat.</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">8</td>
+
+    <td class="text" width="200">Echo request </td>
+
+    <td class="text" width="160">ping</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">11</td>
+
+    <td class="text" width="200">Time exceeded for a datagram </td>
+
+    <td class="text" width="160">Falls ein Gateway ein Datagramm killt (TTL=0) 
+
+      oder ein Fragment nicht ankommt (Timeout)</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">12</td>
+
+    <td class="text" width="200">Parameter problem on a datagram </td>
+
+    <td class="text" width="160">Bei Interpretationsproblemen des IP-Headers</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">13</td>
+
+    <td class="text" width="200">Timestamp request </td>
+
+    <td class="text" rowspan="2">Erlaubt Zeitmessungen und -sychronisation im 
+
+      Netz </td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">14</td>
+
+    <td class="text" width="200">Timestamp reply</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">15</td>
+
+    <td class="text" width="200">Information request </td>
+
+    <td class="text" rowspan="2">Der Host kann seine NetzID erfragen</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">16</td>
+
+    <td class="text" width="200">Information reply </td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">17</td>
+
+    <td class="text" width="200">Address mask request</td>
+
+    <td class="text" rowspan="2">Der Host kann seine Subnetzmaske erfragen</td>
+
+  </tr>
+
+  <tr> 
+
+    <td class="text_zent" width="30">18</td>
+
+    <td class="text" width="200"> Address mask reply</td>
+
+  </tr>
+
+</tbody></table>
+
+<p class="text">&nbsp;</p>
+
+<!-- #EndEditable --> 
+
+<hr>
+
+<!-- #BeginEditable "Link" --> 
+
+<table width="201" border="0" height="51" align="center">
+
+  <tbody><tr> 
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_ip.html"><img src="./arp_icmp_files/buli_lo.jpg" width="30" height="20" alt="zurück" name="Image1" onmouseover="MM_swapImage(&#39;Image1&#39;,&#39;&#39;,&#39;button/buli_hi.jpg&#39;,1)" border="0" onmouseout="MM_swapImgRestore()"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/index.html"><img src="./arp_icmp_files/buob_lo.jpg" width="20" height="30" name="oben" onmouseover="MM_swapImage(&#39;oben&#39;,&#39;&#39;,&#39;button/buob_hi.jpg&#39;,1)" alt="Inhalt" border="0" onmouseout="MM_swapImgRestore()"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_tcp.html"><img src="./arp_icmp_files/bure_lo.jpg" width="30" height="20" alt="vor" name="Image2" onmouseover="MM_swapImage(&#39;Image2&#39;,&#39;&#39;,&#39;button/bure_hi.jpg&#39;,1)" border="0" onmouseout="MM_swapImgRestore()"></a></div>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<!-- #EndEditable -->
+
+<p class="text">&nbsp;</p>
+
+
+
+<!-- #EndTemplate -->
+
+</body></html>

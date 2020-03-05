@@ -1,0 +1,500 @@
+
+<!-- saved from url=(0037)http://graf.tgm.ac.at/BUN/nw_dns.html -->
+<html><!-- #BeginTemplate "../Templates/skriptum.dwt" --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<!-- #BeginEditable "doctitle" --> 
+
+<title>BSNW Netze</title>
+
+<!-- #EndEditable --> 
+
+
+
+<link rel="stylesheet" href="./dns_files/bsnw.css" type="text/css">
+
+<script language="JavaScript">
+
+<!--
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.0
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script>
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onload="MM_preloadImages(&#39;button/buob_hi.jpg&#39;,&#39;button/buli_hi.jpg&#39;,&#39;button/bure_hi.jpg&#39;,&#39;images/dns_ov.gif&#39;)">
+
+<!-- #BeginEditable "Text" --> 
+
+<p class="ueberschrift_2">2.3.5 DNS</p>
+
+<p class="text">Das DNS (Domain-Name-System) ist ein Dienst, der zu einem Internetnamen, 
+
+  einem sogenannten URL (<span class="text_kursiv">uniform resource locator</span>), 
+
+  die entsprechende IP-Adresse liefert und umgekehrt. Damit wird es möglich 
+
+  ohne die Verwendung der unübersichtlichen IP-Adressen am Internet - und 
+
+  neuerdings auch im LAN, mit Hilfe leichter zu merkender Namen zu adressieren. 
+
+  Der Dienst, der auch als Protokoll am Application-Layer anzusiedeln ist, kommuniziert 
+
+  mit faktisch allen höheren Protokollen und operiert nach dem Client-Server-Prinzip 
+
+  im Grunde wie eine automatische Telefonauskunft.</p>
+
+<p class="text">Wird von einem DNS-Client eine IP-Adresse zu einem URL benötigt, 
+
+  so schickt ein <span class="text_fett">Resolver</span> genannter Teil der Netzwerksoftware, 
+
+  unter Beifügung der URL eine IP-Anfrage an einen <span class="text_fett">Domain 
+
+  Name Server </span>(DNS), dessen IP-Adresse dem Netzwerk bekannt ist, weil sie 
+
+  eine Eigenschaft des TCP-Protokolls und auch mit DHCP konfigurierbar ist. Der 
+
+  DNS verfügt über eine zweispaltige Datenbank, die<span class="text_fett"> 
+
+  Zone-File</span> heißt, sucht die gewünschte IP-Adresse und schickt 
+
+  sie an den Client zurück. Findet der DNS die angefragte IP-Adresse nicht, 
+
+  leitet er die Anfrage an einen anderen DNS weiter.</p>
+
+<p class="text">Zu Beginn der Entwicklung des ARPANET war das Zone-File noch auf 
+
+  jedem Rechner lokal gespeichert und wurde gelegentlich per FTP aktualisiert. 
+
+  Noch heute gibt es in den Betriebssystemen eine Datei <span class="quellcode">*\hosts</span>, 
+
+  die als lokales Zone-File verwendet werden kann. Aber auch bei Verwendung zentraler 
+
+  DNS-Server wird rasch klar, dass einige wenige DNS-Server wohl kaum in der Lage 
+
+  sein würden, URLs weltweit aufzulösen. Deshalb ist sowohl der Namensraum 
+
+  der URLs als auch die DNS hierarchisch strukturiert und ihre Verwaltung der 
+
+  <a href="http://www.icann.org/" target="_blank">ICANN</a> (Internet Corporation 
+
+  for Assigned Names and Numbers) übertragen worden.</p>
+
+<p class="text">Wir erkennen drei wesentliche Komponenten:</p>
+
+<ul>
+
+  <li class="text">Domainnamensraum und die Resource Records (RR)</li>
+
+  <li class="text">Domainnameserver (DNS)</li>
+
+  <li class="text">Resolver <br>
+
+  </li>
+
+</ul>
+
+<p class="ueberschrift_3">Domainnamensraum, Resource Records (RR)</p>
+
+<p class="text">Der Domainnamensraum selbst erfüllt eine Baumstruktur, deren 
+
+  Wurzel (<span class="text_kursiv">Root</span>) "." heißt, was 
+
+  selten angegeben wird. Auf der zweiten Ebene liegt die <span class="text_fett">Top 
+
+  Level Domain</span> (TLD), gefolgt von der <span class="text_fett">Domain</span> 
+
+  und allenfalls <span class="text_fett">Subdomains</span>. Auf der höchsten 
+
+  Ebene findet sich der <span class="text_fett">Hostname</span>. Im Anschluss 
+
+  an den Internetnamen des Hosts können (Unter-)Verzeichnisse, Dateinamen 
+
+  und Scriptparameter folgen. Im folgenden Beispiel ist <span class="text_kursiv">graf</span> 
+
+  ein virtueller Host der Domäne <span class="text_kursiv">tgm</span>, die 
+
+  zur TLD <span class="text_kursiv">.ac</span> gehört. <span class="text_kursiv">/bun/wichtig.html</span> 
+
+  gehört eigentlich nicht zum Namensraum im engeren Sinn und gibt einen Pfad 
+
+  zur Datei <span class="text_kursiv">wichtig.html</span> im Verzeichnis <span class="text_kursiv">bun</span> 
+
+  des Servers an. In vielen Fällen ist der Hostname <span class="text_kursiv">www</span>.</p>
+
+<p class="text_fett_zent">http://graf.tgm.ac.at/bun/wichtig.html</p>
+
+<p class="text">Die weltweit genormten Top-Level-Domänen lassen sich in zwei 
+
+  Klassen einteilen, generische wie .com, .org oder .net, die weltweit vergeben 
+
+  werden und länderspezifische wie .at, oder .de. Eine vollständige 
+
+  Liste aller TLDs findet man auf <a href="http://www.iana.org/cctld/cctld-whois.htm">http://www.iana.org/cctld/cctld-whois.htm</a> 
+
+  und wir erkennen, dass die TLD<span class="text_kursiv"> .ac</span> für 
+
+  <span class="text_kursiv">Ascension Island</span>, einer Insel im südlichen 
+
+  Pazifik steht.</p>
+
+<p class="text">Namen, die im Internet verwendet werden müssen dabei einige 
+
+  Spezifikationen erfüllen, wobei die Registrare der einzelnen Länderdomänen 
+
+  allenfalls weitere Einschränkungen vorgeben:</p>
+
+<ul>
+
+  <li class="text_kursiv">Die Länge eines Namensteiles (Domänen- oder 
+
+    Rechnername) darf maximal 63 Zeichen betragen. </li>
+
+  <li class="text_kursiv">Die Gesamtlänge des Full-Qualified-Domain-Names 
+
+    darf 255 Zeichen nicht überschreiten. </li>
+
+  <li class="text_kursiv">Nur Buchstaben, Ziffern und "-" sind in den 
+
+    Namen zugelassen. Dabei muss jeder Name mit einem Buchstaben oder einer Ziffer 
+
+    beginnen und enden.</li>
+
+  <li class="text_kursiv">Zwischen Groß- und Kleinschreibung wird nicht 
+
+    unterschieden.<br>
+
+  </li>
+
+</ul>
+
+<p class="text">Die Baumstruktur des Namensraums findet sich in der Darstellung 
+
+  wieder. Sie wird grundsätzlich von rechts nach links aufgelöst.</p>
+
+<p class="text">Die <span class="text_fett">Resource Records </span>(RR) enthalten 
+
+  die Daten eines DNS-Objekts. Alle Datensätze eines Objekts werden als <span class="text_fett">Zone</span> 
+
+  bezeichnet und sind in einem <span class="text_fett">Zone-File</span> gespeichert.</p>
+
+<p class="ueberschrift_3">Domainnameserver (DNS)</p>
+
+<p class="text">Ein Domainnameserver ist ein Programm, das Teile des Namensraum 
+
+  <span class="text_kursiv">autoritativ</span> - dh. gesichert - kennt, und diese 
+
+  Resource Records weitergibt. Diese Nameserver sind auf einen bestimmten Label 
+
+  der Baumstruktur delegiert und sind für die darunter liegenden Ebenen zuständig, 
+
+  wobei sie auch weiter delegieren können. Gewöhnliche DNS-Anfragen 
+
+  werden über UDP (Port 53), das Abgleichen ganzer Zonen mit anderen DNS 
+
+  über TCP (Port 53) adressiert.</p>
+
+<p class="text">Bei den Nameservern werden unterschieden:</p>
+
+<ul>
+
+  <li class="text">Autoritative Nameserver <span class="text_fett">(Primary DNS</span>) 
+
+    haben gesicherte Zone-Files, die lokal verändert werden können.</li>
+
+  <li class="text">Nicht-autoritative Nameserver (<span class="text_fett">Secondary 
+
+    DNS</span>) erhalten ihre Zone-Files regelmäßig von einem Primary-DNS. 
+
+    Diese sind lokal nicht veränderbar und innerhalb des Zeitraums bis zum 
+
+    nächsten Update teilweise unkorrekt.</li>
+
+  <li class="text"><span class="text_fett">Cache-Only</span><span class="text"> 
+
+    Nameserver besitzen keine eigenen Zone-Files sondern leiten Anfragen eines 
+
+    Resolvers lediglich an einen höheren DNS weiter. Der Sinn dieser Server 
+
+    liegt in einem Cache, in dem einmal erhaltene Informationen, mit einer TTL 
+
+    versehen, zwischengespeichert werden, was die Providerleitungen entlastet.</span></li>
+
+</ul>
+
+<p class="text">Der Baumstruktur des Namensraums entspricht weitgehend eine hierarchische 
+
+  Struktur der DNS-Server. Die Wurzel selbst wird von 13 <span class="text_fett">Root-Domain-Name-Servern</span> 
+
+  verwaltet, die abgesehen von Server I (Stockholm), K (London) und M (Tokio) 
+
+  in den USA stehen. Die Liste dieser 13 Server muss jedem untergeordneten DNS 
+
+  bekannt sein und ist anonym mit <a href="ftp://rs.internic.net/">ftp://rs.internic.net</a> 
+
+  erreichbar.</p>
+
+<p class="quellcode" align="left">A.ROOT-SERVERS.NET. A 198.41.0.4<br>
+
+  B.ROOT-SERVERS.NET. A 128.9.0.107<br>
+
+  C.ROOT-SERVERS.NET. A 192.33.4.12<br>
+
+  D.ROOT-SERVERS.NET. A 128.8.10.90<br>
+
+  E.ROOT-SERVERS.NET. A 192.203.230.10<br>
+
+  F.ROOT-SERVERS.NET. A 192.5.5.241<br>
+
+  G.ROOT-SERVERS.NET. A 192.112.36.4<br>
+
+  H.ROOT-SERVERS.NET. A 128.63.2.53<br>
+
+  I.ROOT-SERVERS.NET. A 192.36.148.17<br>
+
+  J.ROOT-SERVERS.NET. A 192.58.128.30<br>
+
+  K.ROOT-SERVERS.NET. A 193.0.14.129<br>
+
+  L.ROOT-SERVERS.NET. A 198.32.64.12<br>
+
+  M.ROOT-SERVERS.NET. A 202.12.27.33</p>
+
+<p class="text" align="left">Unterhalb dieser DNS gibt es für jede TLD, für 
+
+  jede Domain und jede Subdomain zumindest einen, in der Regel sogar mehrere, 
+
+  DNS. Die zur Zeit meistbenutzte Software für DNS ist<span class="text_fett"> 
+
+  BIND</span> (Berkeley Internet Name Domain).</p>
+<p class="text" align="left"><span class="text_fett_zent_kurs">DNS der untersten 
+Ebene</span> werden von Internetprovidern betrieben, ihre IP-Adressen sind in 
+der Konfiguration des Internetprotokolls (ipconfig / ifconfig) abrufbar. Der 
+Zugang zum DNS des Internetproviders oder gegebenenfalls der Eintrag der eigenen 
+Domain in dessen Zonefile sind zentrale Bestandteile des Vertrags, der gemeinhin
+<span class="text_kursiv">Internetzugang</span> heißt. Die folgende 
+Konfiguration eines WLAN-Routers zeigt, dass dieser Funktionen eines DNS 
+übernimmt. </p>
+<p class="text" align="left"><span class="quellcode">Drahtlos-LAN-Adapter WLAN:<br>
+<br>Verbindungsspezifisches DNS-Suffix:<br>Beschreibung. . . . . . . . . . . : 
+Intel(R) Dual Band Wireless-AC 7265<br>Physische Adresse . . . . . . . . : 
+A4-02-B9-D2-83-AE<br>DHCP aktiviert. . . . . . . . . . : Ja<br>Autokonfiguration 
+aktiviert . . . : Ja<br>Verbindungslokale IPv6-Adresse . : 
+fe80::a497:ebd1:2176:6441%13(Bevorzugt)<br>IPv4-Adresse . . . . . . . . . . : 
+192.168.8.108(Bevorzugt)<br>Subnetzmaske . . . . . . . . . . : 255.255.255.0<br>
+Lease erhalten. . . . . . . . . . : Montag, 3. Juli 2017 06:56:49<br>Lease läuft 
+ab. . . . . . . . . . : Dienstag, 4. Juli 2017 06:56:49<br>Standardgateway . . . 
+. . . . . . : 192.168.8.1<br>DHCP-Server . . . . . . . . . . . : 192.168.8.1<br>
+DHCPv6-IAID . . . . . . . . . . . : 161743545<br>DHCPv6-Client-DUID. . . . . . . 
+. : 00-01-00-01-20-1F-E0-B2-A4-02-B9-D2-83-AE<br>DNS-Server . . . . . . . . . . 
+. : 192.168.8.1<br>192.168.8.1<br>NetBIOS über TCP/IP . . . . . . . : Aktiviert</span></p>
+
+<p class="text" align="left">Schließlich sei noch erwähnt, dass es auch freie 
+DNS gibt. Bei der ständigen Verwendung des bekannten DNS der Firma Google mit 
+der IP-Adresse</p>
+<p class="text_fett_zent" align="left">8.8.8.8</p>
+<p class="text" align="left">ist allerdings zu beachten, dass wie bei allen 
+DNS-Anfragen das Surfverhalten des gesamten LAN protokolliert werden kann, was 
+doch einen gewissen Einblick in die Privatsphäre bedeutet.</p>
+<p class="ueberschrift_3" align="left">Resolver</p>
+
+<p class="text" align="left">Resolver sind Programme, die in der Regel schon in 
+
+  Applikationen wie Browser eingebunden sind. Sie führen die Kommunikation 
+
+  mit den DNS. Für derartige DNS-Abfragen gibt es zwei Methoden:</p>
+
+<ul>
+
+  <li class="text"><span class="text">Rekursiv:</span> Die Anfrage eines Clients 
+
+    wird mit einem Resource Record beantwortet, solange an einen übergeordneten 
+
+    - ebenfalls rekursiven - DNS weitergegeben, bis die gewünschte Information 
+
+    zurückgegeben werden kann. Die Arbeit des Suchens wird übergeordneten 
+
+    DNS überlassen. Der Vorteil des Verfahrens liegt in der Kürze der 
+
+    Suchpfade innerhalb der Baumstruktur, sein Nachteil in der drohenden Überlastung 
+
+    der Wurzel.</li>
+
+  <li class="text">Iterativ: Die Anfrage eines Clients wird mit einem Resource 
+
+    Record beantwortet oder es wird die IP-Adresse eines anderen DNS zurückgegeben, 
+
+    der neuerlich durch den Client bemüht wird. Bei diesem Verfahren fragt 
+
+    der Resolver des Client solange die Nameserver ab, bis er bei einem authoritativen 
+
+    DNS landet. Die Rootserver und höhere DNS arbeiten iterativ.<br>
+
+  </li>
+
+</ul>
+
+<p class="text" align="left">Den Ablauf einer fiktiven iterativen DNS-Abfrage 
+
+  zeigt die folgende Grafik, bei OnMouseOver erscheint die rekursive Variante:</p>
+
+<p class="text_zent" align="left"><a href="javascript:;" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image3&#39;,&#39;&#39;,&#39;images/dns_ov.gif&#39;,1)"><img src="./dns_files/dns.gif" width="500" height="365" border="0" name="Image3"></a></p>
+
+<p class="text" align="left">Der Client <span class="text_kursiv">www.katz.org</span> 
+
+  hat einen DNS <span class="text_kursiv">ns.katz.org</span> eingetragen und benötigt 
+
+  die IP-Adresse von <span class="text_kursiv">www.maus.n</span>et, der auf dem 
+
+  DNS <span class="text_kursiv">ns.maus.net </span>eingetragen ist. Die Beschreibung 
+
+  der iterativen Variante:</p>
+
+<ol>
+
+  <li class="text"><span class="text_kursiv">www.katz.org</span> fragt seinen 
+
+    DNS <span class="text_kursiv">ns.katz.org</span> nach der IP-Adresse von <span class="text_kursiv">www.maus.net. 
+
+    </span>Ist die Adresse eingetragen, wird sie geschickt. Ist die Adresse nicht 
+
+    eingetragen sucht <span class="text_kursiv">ns.katz.org</span> im eigenen 
+
+    Zone-File nach der IP-Adresse des DNS <span class="text_kursiv">ns.maus.net</span> 
+
+    der Domäne <span class="text_kursiv">maus</span>.</li>
+
+  <li class="text">Ist<span class="text_kursiv"> ns.maus.net</span> nicht eingetragen 
+
+    sendet <span class="text_kursiv">ns.katz.org</span> eine Anfrage an den <span class="text_kursiv">Root-DNS</span> 
+
+    der TLD <span class="text_kursiv">.net</span> nach der IP-Adresse von <span class="text_kursiv">ns.maus.net</span><span class="text">.</span></li>
+
+  <li class="text">Der Root-DNS kennt seine Name-Server und liefert die IP-Adresse 
+
+    von <span class="text_kursiv">ns.maus.net.</span></li>
+
+  <li class="text">Nun kann bei <span class="text_kursiv">ns.maus.net</span> nach 
+
+    der IP-Adresse von <span class="text_kursiv">www.maus.net</span> gefragt werden</li>
+
+  <li class="text">und <span class="text_kursiv">ns.maus.net</span> liefert diese.</li>
+
+  <li class="text">Der Client <span class="text_kursiv">www.katz.org</span> erhält 
+
+    die gewünschte IP-Adresse. </li>
+
+</ol>
+
+<p class="text">Lag die Bedeutung von DNS ursprünglich in der Verwendung 
+
+  von Internetnamen statt IP-Adressen, so wird das System zunehmend auch auf LANs 
+
+  bedeutungsvoll, weil bei den neuesten Versionen der Netzwerkbetriebssysteme 
+
+  Benutzer und Hosts wie im DNS adressiert werden können.<br>
+  Hinsichtlich der Administration solcher <span class="text_fett_kursiv">lokaler DNS-Server</span> sind drei Bereiche am Server wesentlich:</p>
+<ul>
+  <li class="text">die <span class="text_fett">Lookupzone</span>, ein Zonefile, das zu Namen die IP-Adressen auflistet</li>
+  <li class="text">die<span class="text_fett"> Revers Lookupzone</span>, ein Zonefile, das zu IP-Adressen die Namen auflistet</li>
+  <li class="text">die IP-Adressen weiterer DNS-Server, an die eine Anfrage, die nicht beantwortet werden kann, weitergeleitet wird</li>
+</ul>
+<p>  Ein Problem des DNS besteht auch darin, dass DNS-Namen nur alphanumerische Zeichen 
+
+  und den Bindestrich enthalten dürfen. Das ist für Länder mit 
+
+  Umlauten unangenehm, für Länder wie etwa China unannehmbar. Daher 
+
+  wird an einer Erweiterung gearbeitet.<br>
+  Dem Problem, dass immer mehr Clients dynamische IP-Adressen erhalten und damit 
+
+  ständige Änderungen in den Zone-Files notwendig werden, wird mit <span class="text_fett">DynDNS</span> begegnet, bei dem jeder Client beim Ändern seiner IP-Adresse diese dem 
+
+  DNS meldet.</p>
+<!-- #EndEditable --> 
+
+<hr>
+
+<!-- #BeginEditable "Link" --> 
+
+<table width="201" border="0" height="51" align="center">
+
+  <tbody><tr> 
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_hprot.html"><img src="./dns_files/buli_lo.jpg" width="30" height="20" alt="zurück" name="Image1" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image1&#39;,&#39;&#39;,&#39;button/buli_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/index.html"><img src="./dns_files/buob_lo.jpg" width="20" height="30" name="oben" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;oben&#39;,&#39;&#39;,&#39;button/buob_hi.jpg&#39;,1)" alt="Inhalt" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_IPv6.html"><img src="./dns_files/bure_lo.jpg" width="30" height="20" alt="vor" name="Image2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image2&#39;,&#39;&#39;,&#39;button/bure_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<!-- #EndEditable --> 
+
+<p class="text">&nbsp;</p>
+
+
+
+<!-- #EndTemplate -->
+
+
+
+</body></html>

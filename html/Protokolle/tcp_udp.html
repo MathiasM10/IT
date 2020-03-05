@@ -1,0 +1,352 @@
+
+<!-- saved from url=(0037)http://graf.tgm.ac.at/BUN/nw_tcp.html -->
+<html><!-- #BeginTemplate "/BSNW/Templates/skriptum.dwt" --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<!-- #BeginEditable "doctitle" --> 
+
+<title>BSNW Netze</title>
+
+<!-- #EndEditable --> 
+
+
+
+<link rel="stylesheet" href="./tcp_udp_files/bsnw.css" type="text/css">
+
+<script language="JavaScript">
+
+<!--
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.0
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && document.getElementById) x=document.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+//-->
+
+</script>
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onload="MM_preloadImages(&#39;button/buob_hi.jpg&#39;,&#39;button/buli_hi.jpg&#39;,&#39;button/bure_hi.jpg&#39;)">
+<!-- #BeginEditable "Text" --> 
+<p class="ueberschrift_2">2.3.3 TCP, UDP,<span class="ueberschrift_3"> SNMP</span></p>
+<p class="text">Auf dem OSI-Layer 4 (transport) können mehrere Protokolle 
+  arbeiten, die wohl Bedeutendsten sind TCP und UDP.</p>
+<p class="ueberschrift_3">TCP (Transmission Control Protocol)</p>
+<p class="text">Es wirkt mit dem IP-Protokoll zusammen (TCP/IP) und gewährleistet 
+  auch bei größeren Datenmengen über weite Entfernungen einen 
+  sicheren Datenstrom, übernimmt also jene Sicherungs- und Ordnungsfunktionen, 
+  die das IP-Protokoll nicht zur Verfügung stellt. Angesprochen wird es durch 
+  ein Feld im IP-Header als ULP (Upper Layer Protokoll) des IP-Protokolls.</p>
+<p class="text">Wir zeigen anhand der Eigenschaften des TCP-Protokolls, wie die 
+  geforderten Funktionen umgesetzt werden. Das TCP-Protokoll ist <span class="text_fett">verbindungsorientiert</span>, 
+  das heißt, dass für jeden Übertragungsjob eine Verbindung zwischen 
+  Sender und Empfänger aufgebaut wird. Umgesetzt wird das über spezielle 
+  Bits im TCP-Header der <span class="text_fett">Segmente</span> (Datenpakete 
+  auf der Schicht 4):</p>
+<ul>
+  <li class="text_fett">SYN-Bit: <span class="text">Das gesetzte Bit bedeutet 
+    eine Synchronisationsanforderung (SYN-Request)</span></li>
+  <li class="text"><span class="text_fett">ACK-Bit:</span> Das gesetzte Acknowledge-Bit 
+    hat die Bedeutung einer Bestätigung. </li>
+</ul>
+<p class="text">Zusätzlich wird eine auf dem Host generierte <span class="text_fett">Sequencenumber</span> 
+  mitgeschickt, die während der Verbindungssitzung incrementiert wird. Damit 
+  läuft der Verbindungsaufbau einer TCP-Verbindung zum Beispiel folgendermaßen 
+  ab:</p>
+<p class="text_zent"><img src="./tcp_udp_files/synack.gif" width="300" height="232"></p>
+<p class="text">Datenübertragung und Schließen der Verbindung sind 
+  analog gestaltet. Die Verbindung selbst ist vollduplex. Mit Hilfe der SYN- und 
+  ACK-Bits werden also Quittungen für den korrekten Empfang angefordert bzw. 
+  ausgestellt, das Verfahren ist auch als <span class="text_fett">Handshake-Verfahren</span> 
+  bekannt. Um den Datenstrom nicht unnötig zu belasten, können auch 
+  mehrere solche Bits in ein Segment gepackt werden.</p>
+<p class="text">Dem gleichen Ziel dient auch ein Verfahren, das <span class="text_fett">Fenstertechnik</span> 
+  genannt wird. Man versteht dabei unter einem Fenster die Anzahl der Bytes, die 
+  ohne sofortige Bestätigung abgeschickt werden dürfen. Die Fenstergröße 
+  selbst wird zwischen Sender und Empfänger vereinbart und bei Performanceproblemen 
+  reduziert. Die extreme Fenstergröße 0 bedeutet, dass erst dann wieder 
+  übertragen wird, wenn eine Empfangsbestätigung der bisher gesendeten 
+  Bytes eingetroffen ist. Trifft eine solche Bestätigung nicht ein, wird 
+  ein neuerlicher Übertragungsversuch unternommen. Das Fenster ist also ein 
+  Puffer für gesendete aber noch nicht quittierte Bytes.</p>
+<p class="text_zent"><img src="./tcp_udp_files/fenster.gif" width="400" height="63"></p>
+<p class="text">Die Grafik illustriert:</p>
+<ul>
+  <li class="text">Byte 1 und 2 wurden abgeschickt und der Empfang quittiert.</li>
+  <li class="text">Byte 3, 4 und 5 wurden abgeschickt aber noch nicht quittiert.</li>
+  <li class="text">Byte 6 wird erst abgeschickt, sobald zumindest Byte 3 quittiert 
+    ist.</li>
+</ul>
+<p class="text">Damit kann die Verfahrenstechnik des TCP-Protokolls - grob vereinfacht 
+  - beschrieben werden:</p>
+<ol>
+  <li class="text">Senderseitiges Aufteilen einer Nachricht in mehrere Segmente 
+    mit max. 65 KByte, die mit TCP-Headern versehen werden. Sequenznummern garantieren 
+    ein späteres Ordnen.</li>
+  <li class="text">Verbindungsaufbau zum Empfänger und Abschicken der Segmente 
+    über mehrere Router hinweg. Die Routenwahl übernimmt das IP-Protokoll, 
+    Sicherungsaufgaben liegen bei TCP.</li>
+  <li class="text">Das Eintreffen der Segmente beim Empfänger kann in geänderter 
+    Reihenfolge, doppelt oder gar unvollständig erfolgen.</li>
+  <li class="text">Anfordern der fehlenden Segmente, die neuerlich gesendet werden.</li>
+  <li class="text">Empfängerseitige Zusammenstellen der Nachricht.</li>
+</ol>
+<p class="ueberschrift_3">&nbsp;</p>
+<p class="ueberschrift_3">Ports</p>
+<p class="text">Besondere Erwähnung soll noch die Schnittstelle des TCP-Protokolls 
+  und anderer Schicht 4 Protokolle wie UDP mit der darüberliegenden <span class="text_kursiv">process-application-Schicht</span> 
+  finden. Die Schnittstelle ist so gestaltet, dass TCP-Pakete direkt den auf höheren 
+  Schichten arbeitenden Prozessen übergeben werden können. Vermittelt 
+  wird das durch zwei 8-Bit-Felder im TCP-Header, den sogenannten <span class="text_fett">Ports</span> 
+  oder <span class="text_fett">Portnummern</span> (<span class="text_fett">Source 
+  Port/Destination Port</span>) Über diese Ports erfolgt der Datenaustausch 
+  zwischen TCP und den entsprechenden Anwendungsprozessen, wobei TCP mehrere solche 
+  Verbindungen gleichzeitig abarbeiten kann. Diese Eigenschaft wird gelegentlich 
+  <span class="text_fett">Multiplexing</span> genannt.</p>
+<p class="text">Im Prinzip geschieht die Vergabe von Portnummern an Anwendungsprozesse 
+  dynamisch und wahlfrei. Für Standardapplikationen wurden allerdings Portnummern 
+  festgelegt, die von der IANA (Internet Assigned Numbers Authority) bzw. InterNIC 
+  kontrolliert werden.</p>
+<p class="text">Die Konfiguration der Portnummern durch TCP erfolgt auf dem Host 
+  - im Grunde automatisiert - nach folgenden Prinzipien: </p>
+<ul>
+  <li class="text">Standardapplikationen haben <span class="text_fett">well known 
+    Ports</span> und kommunizieren mit dem Protokoll über eine feste Portnummer 
+    zwischen 0 und 1023.</li>
+  <li class="text">Andere Server-Client Applikationen vereinbaren beim Verbindungsaufbau 
+    einen freien Port ab 1024, der vom Betriebssystem zugewiesen wird.</li>
+  <li class="text">Die Portnummer ist eigentlich Teil der Adresse. Weil sie 16 
+    Bit groß ist könnten theoretisch 2<sup>16</sup> = 65536 TCP-Verbindungen 
+    mit einer einzigen IP-Adresse aufgebaut werden.</li>
+</ul>
+<p class="text">Die folgende Tabelle listet einige häufig verwendete TCP-Ports 
+  auf, andere Schicht 4 Protokolle verwenden eine andere Zuordnung:</p>
+<table width="357" border="1" align="center">
+  <tbody><tr bgcolor="#003366"> 
+    <td class="text_fett_zent_kurs" width="50%"><font color="#CCCCCC">Portnummer 
+      </font></td>
+    <td class="text_fett_zent_kurs"><font color="#CCCCCC">Protokoll</font></td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">20</td>
+    <td class="text">FTP (Daten) </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">21</td>
+    <td class="text">FTP (Steuerung) </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">22</td>
+    <td class="text">Secure Shell </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">23</td>
+    <td class="text">Telnet </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">25</td>
+    <td class="text">SMTP </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">53</td>
+    <td class="text">DNS-Server </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">70</td>
+    <td class="text">Gopher</td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">79</td>
+    <td class="text">Finger </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">80</td>
+    <td class="text">HTTP (Proxy-Server) </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">110</td>
+    <td class="text">POP3 </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">119</td>
+    <td class="text">NNTP </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">143 </td>
+    <td class="text">IMAP </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">194 </td>
+    <td class="text">IRC</td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">210</td>
+    <td class="text">WAIS</td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">256 - 1023 </td>
+    <td class="text">UNIX-spezifische Services </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">540</td>
+    <td class="text">UUCP</td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">1024 - 49151</td>
+    <td class="text">Registered Ports </td>
+  </tr>
+  <tr> 
+    <td width="50%" class="text_zent">49152 - 65535</td>
+    <td class="text">Dynamic / Private Ports </td>
+  </tr>
+</tbody></table>
+<p class="text">Eine vollständige Liste der TCP-Portnummern und auch der 
+  UDP-Portnummern findet man auf: <a href="http://www.iana.org/assignments/port-numbers" target="_blank">http://www.iana.org/assignments/port-numbers</a>. 
+  Mit Hilfe der Ports ist es also möglich, Nachrichten direkt bestimmten 
+  Anwendungsprozessen zuzuweisen. Die Schnittstelle, also das Paar aus IP-Adresse 
+  und Portnummer wird gelegentlich auch als <span class="text_fett">Socket</span> 
+  bezeichnet. Die Ports selbst können unidirektionale oder bidirektionale 
+  Kommunikation gestatten, stellen aber, bei aller Bequemlichkeit, ein enormes 
+  Sicherheitsrisiko dar. Bekannt sind in diesem Zusammenhang <span class="text_kursiv">eingeschleppte</span> 
+  Prozesse, die auf einem Port <span class="text_kursiv">lauschen</span>, also 
+  auf das Eintreffen bestimmter Nachrichten warten und die in der Welt der Viren 
+  <span class="text_fett">Trojaner</span> heißen. Bei aller gebotenen Vorsicht 
+  ist aber wesentlich, dass Prozesse, die für sie bestimmte Nachrichten an 
+  den entsprechenden Ports abholen und direkt weiter verarbeiten, für eine 
+  störungsfreie Datenverarbeitung unerlässlich sind.</p>
+<p class="text">Wir fassen noch einmal die Hauptmerkmale von TCP zusammen:</p>
+<ul>
+  <li class="text">verbindungsorientiert</li>
+  <li class="text">vollduplexfähig</li>
+  <li class="text">hohe Zuverlässigkeit</li>
+  <li class="text">Sicherung der Datenübertragung durch Prüfsumme und 
+    Quittierung mit Zeitüberwachung</li>
+  <li class="text">Fensterverfahren (Sliding Window)</li>
+  <li class="text">Möglichkeit von Vorrangdaten</li>
+  <li class="text">Adressierung der Ende-zu-Ende-Verbindung durch Portnummern 
+    in Verbindung mit IP-Adressen</li>
+</ul>
+<p class="text">Der TCP-Header sieht folgendermaßen aus:</p>
+<p class="text_kursiv_zent"><img src="./tcp_udp_files/TCP_Header.png" alt="TCP Header" width="558" height="480"> </p>
+<p class="ueberschrift_3">UDP (User Datagram Protocol)</p>
+<p class="text">Das UDP-Protokoll wirkt wie TCP auf dem OSI-Layer 4 und kommuniziert 
+  ebenfalls mit dem IP-Protokoll, ist aber in seinem Funktionsumfang wesentlich 
+  eingeschränkt. Es ist ein verbindungsloses Protokoll, das heißt es 
+  wird keine Verbindung zwischen Quell- und Zielhost aufgebaut. Es wurde konstruiert, 
+  um den Anwendungsprozessen selbst eine Kommunikationsmöglichkeit zu eröffnen, 
+  ist bei einer Headerlänge von nur 16 Bit entsprechend schlank, überlässt 
+  aber den Anwendungsprozessen die fehlenden Sicherheits- und Ordnungsaufgaben. 
+  Es garantiert weder die korrekte Ablieferung der Datagramme noch managt es Datagrammduplikate 
+  oder Vertauschungen in der Reihenfolge.</p>
+<p class="text">Es gestattet jedoch das <span class="text_fett">Multiplexen</span> 
+  von Verbindungen durch <span class="text_fett">UDP-Ports</span>, die analog 
+  zu den TCP-Ports Verwendung finden. Auch eine Fehlerbehandlung durch eine Checksum 
+  ist implementiert. Der Funktionsumfang ist wohl am Besten ablesbar, wenn man 
+  den 4x2 Byte langen Header betrachtet:</p>
+<ul>
+  <li class="text">Source Port</li>
+  <li class="text">Destination Port</li>
+  <li class="text">Length</li>
+  <li class="text">UDP-Checksum</li>
+</ul>
+<p class="text">Eine vollständige Liste der UDP-Portnummern und auch der 
+  TCP-Portnummern findet man auf: <a href="http://www.iana.org/assignments/port-numbers" target="_blank">http://www.iana.org/assignments/port-numbers</a></p>
+<p class="text">Der wesentlich kleinere UDP-Header sieht folgendermaßen aus:</p>
+<p class="text_kursiv_zent"><img src="./tcp_udp_files/Header_of_UDP.jpg" alt="UDP Header"> </p>
+<p class="text"><span class="ueberschrift_3">SNMP (simple network management protocol)</span></p>
+<p class="text">Das Protokoll unterstützt zentrales Netzwerkmanagement indem 
+  es Netzwerkereignisse (<span class="text_fett_kursiv">Traps</span>) aufzeichnet. 
+  Es unterscheidet <span class="text_fett_kursiv">Netzwerkmanagement-Stationen 
+  (NMS)</span><span class="text"> wie Router, Host, Bridge oder Terminal-Server, 
+  </span> die Anwendungen zur Überwachung und Steuerung ausführen, und 
+  die <span class="text_fett_kursiv">Netzwerkkomponenten</span><span class="text">. 
+  Über SNMP wird nun eine Kommunikation aufgebaut, bei der relevante Netzwerkdaten 
+  gesammelt und in einer </span><span class="text_fett_kursiv">MIB (Manager Information 
+  Base)</span><span class="text"> auf der NMS gespeichert werden. Beispiele solcher 
+  Informationen sind Netzwerk-Adressen, physikalische Adressen, Timer, Zähler 
+  und Protokollparameter.</span></p>
+<p class="text"><span class="text">SNMP wird automatisch mit TCP/IP geladen und 
+  in INETCFG.NLM konfiguriert.</span><br>
+</p>
+<!-- #EndEditable --> 
+<hr>
+
+<!-- #BeginEditable "Link" -->. 
+
+<table width="201" border="0" height="51" align="center">
+
+  <tbody><tr> 
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_arp.html"><img src="./tcp_udp_files/buli_lo.jpg" width="30" height="20" alt="zurück" name="Image1" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image1&#39;,&#39;&#39;,&#39;button/buli_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/index.html"><img src="./tcp_udp_files/buob_lo.jpg" width="20" height="30" name="oben" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;oben&#39;,&#39;&#39;,&#39;button/buob_hi.jpg&#39;,1)" alt="Inhalt" border="0"></a></div>
+
+    </td>
+
+    <td width="33%"> 
+
+      <div align="center"><a href="http://graf.tgm.ac.at/BUN/nw_hprot.html"><img src="./tcp_udp_files/bure_lo.jpg" width="30" height="20" alt="vor" name="Image2" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;Image2&#39;,&#39;&#39;,&#39;button/bure_hi.jpg&#39;,1)" border="0"></a></div>
+
+    </td>
+
+  </tr>
+
+</tbody></table>
+
+<!-- #EndEditable --> 
+
+<p class="text">&nbsp;</p>
+
+
+
+<!-- #EndTemplate -->
+
+
+
+</body></html>
