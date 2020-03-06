@@ -5,7 +5,7 @@ def Return_Event(event):
 
 
 SearchWindow = Tk()
-Txt1=Entry(master=SearchWindow, bg='lightgray')
+Txt1=Entry(master=SearchWindow, bg='white')
 #TODO Set Window pos to Top Left
 # SearchWindow.geometry('0+0')
 Txt1.pack()
