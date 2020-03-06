@@ -1,13 +1,15 @@
 from tkinter import *
 
 def Return_Event(event):
-    SearchWindow.destroy()
+    SearchWord=Txt1.get()
+    print(SearchWord)
 
+def Search_Engine():
+    pass
 
 SearchWindow = Tk()
 Txt1=Entry(master=SearchWindow, bg='white')
-#TODO Set Window pos to Top Left
-# SearchWindow.geometry('0+0')
+SearchWindow.geometry('0x0+0+0')
 Txt1.pack()
 SearchWindow.bind_all('<Return>', Return_Event)
 Txt1.focus_set()
